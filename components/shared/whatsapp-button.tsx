@@ -7,10 +7,19 @@ function WhatsAppIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export default function WhatsAppButton() {
+interface WhatsAppButtonProps {
+  whatsappNumber?: string | null;
+}
+
+const DEFAULT_WHATSAPP_NUMBER = '201000000000';
+
+export default function WhatsAppButton({ whatsappNumber }: WhatsAppButtonProps) {
+  const digits = whatsappNumber?.replace(/\D/g, '');
+  const number = digits || DEFAULT_WHATSAPP_NUMBER;
+
   return (
     <a
-      href="https://wa.me/201000000000"
+      href={`https://wa.me/${number}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"

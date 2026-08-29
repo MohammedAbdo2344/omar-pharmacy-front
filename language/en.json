@@ -47,6 +47,35 @@
     "cardBrandSub": "Care kit",
     "cardFooter": "A little more care in every delivery."
   },
+  "categoriesSection": {
+    "badge": "Your everyday care",
+    "title": "Care for every day.",
+    "browseAll": "Browse all",
+    "products": "products"
+  },
+  "whyOmarSection": {
+    "badge": "Why Omar Pharmacy",
+    "title1": "The neighborhood",
+    "title2": "pharmacy, made easier.",
+    "description": "We keep the essentials close, the service personal, and the next step clear.",
+    "meetTeam": "Meet your care team",
+    "hoursTitle": "Open when life happens",
+    "locationTitle": "Local, not distant",
+    "noteBadge": "A responsible note",
+    "noteTitle": "Prescription care, handled properly.",
+    "noteDescription": "Some medicines require a valid prescription or pharmacist approval. Send us your request and our team will review it before anything is prepared.",
+    "contactPharmacist": "Contact a pharmacist"
+  },
+  "productsSection": {
+    "badge": "Picked for you",
+    "title": "Everyday essentials",
+    "subtitle": "Well-known basics for your medicine cabinet and routine.",
+    "popular": "Popular",
+    "bestSeller": "Best seller",
+    "highOffer": "Special offer",
+    "off": "{percent}% off",
+    "currency": "EGP"
+  },
   "home": {
     "welcome": "Welcome to Omar Pharmacy",
     "subtitle": "Your trusted partner in health and wellness",

@@ -10,12 +10,10 @@ const localeLabels: Record<string, string> = { en: 'EN', ar: 'AR' };
 
 export default function Navbar() {
     const t = useTranslations('navbar');
-    const tCat = useTranslations('categories');
     const locale = useLocale();
     const pathname = usePathname();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
 
     const switchLocale = (nextLocale: string) => {
         if (nextLocale === locale) return;
@@ -42,16 +40,8 @@ export default function Navbar() {
     const navLinks = [
         { name: t('home'), href: '/' },
         { name: t('products'), href: '/products' },
-        { name: t('categories'), href: '/categories', hasDropdown: true },
         { name: t('about'), href: '/about' },
         { name: t('contact'), href: '/contact' },
-    ];
-
-    const categories = [
-        { name: tCat('medicines'), href: '/categories/medicines' },
-        { name: tCat('supplements'), href: '/categories/supplements' },
-        { name: tCat('personalCare'), href: '/categories/personal-care' },
-        { name: tCat('babyCare'), href: '/categories/baby-care' },
     ];
 
     return (
@@ -81,35 +71,13 @@ export default function Navbar() {
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center gap-6">
                         {navLinks.map((link) => (
-                            <div
+                            <a
                                 key={link.name}
-                                className="relative group"
-                                onMouseEnter={() => link.hasDropdown && setIsCategoriesOpen(true)}
-                                onMouseLeave={() => link.hasDropdown && setIsCategoriesOpen(false)}
+                                href={link.href}
+                                className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
                             >
-                                <a
-                                    href={link.href}
-                                    className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-                                >
-                                    {link.name}
-                                </a>
-                                {link.hasDropdown && (
-                                    <div
-                                        className={`absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 py-2 ${isCategoriesOpen ? 'block' : 'hidden'
-                                            }`}
-                                    >
-                                        {categories.map((category) => (
-                                            <a
-                                                key={category.name}
-                                                href={category.href}
-                                                className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
-                                            >
-                                                {category.name}
-                                            </a>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
+                                {link.name}
+                            </a>
                         ))}
                     </div>
 
@@ -148,35 +116,14 @@ export default function Navbar() {
                     <div className="md:hidden mt-4 pb-4">
                         <div className="flex flex-col space-y-2">
                             {navLinks.map((link) => (
-                                <div key={link.name}>
-                                    <a
-                                        href={link.href}
-                                        className="block text-gray-700 hover:text-blue-600 transition-colors font-medium py-2"
-                                        onClick={() => {
-                                            if (link.hasDropdown) {
-                                                setIsCategoriesOpen(!isCategoriesOpen);
-                                            } else {
-                                                setIsMobileMenuOpen(false);
-                                            }
-                                        }}
-                                    >
-                                        {link.name}
-                                    </a>
-                                    {link.hasDropdown && isCategoriesOpen && (
-                                        <div className="pl-4 mt-2 space-y-2">
-                                            {categories.map((category) => (
-                                                <a
-                                                    key={category.name}
-                                                    href={category.href}
-                                                    className="block text-gray-600 hover:text-blue-600 transition-colors py-1"
-                                                    onClick={() => setIsMobileMenuOpen(false)}
-                                                >
-                                                    {category.name}
-                                                </a>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    className="block text-gray-700 hover:text-blue-600 transition-colors font-medium py-2"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                >
+                                    {link.name}
+                                </a>
                             ))}
                             <button
                                 className="flex items-center gap-1.5 text-gray-700 hover:text-blue-600 transition-colors font-medium py-2"
