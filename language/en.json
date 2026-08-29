@@ -1,0 +1,64 @@
+{
+  "navbar": {
+    "home": "Home",
+    "products": "Products",
+    "categories": "Categories",
+    "about": "About us",
+    "contact": "Contact",
+    "search": "Search",
+    "cart": "Cart"
+  },
+  "categories": {
+    "medicines": "Medicines",
+    "supplements": "Supplements",
+    "personalCare": "Personal Care",
+    "babyCare": "Baby Care"
+  },
+  "footer": {
+    "title": "Omar Pharmacy",
+    "description": "Your trusted partner in health and wellness. Quality medicines and healthcare products at your fingertips.",
+    "quickLinks": "Quick Links",
+    "categories": "Categories",
+    "contactUs": "Contact Us",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "visitUs": "Visit Omar Pharmacy",
+    "hours": "Open daily · 8:00 AM — 12:00 AM",
+    "contactPharmacist": "Contact a pharmacist",
+    "note": "Some medicines may require pharmacist approval or ID verification.",
+    "copyright": "© {year} Omar Pharmacy. All rights reserved."
+  },
+  "hero": {
+    "badge": "Care, close to home",
+    "titleLine1": "Your Health,",
+    "titleLine2": "Our Priority",
+    "titleArabic": "صحتك أولويتنا",
+    "description": "Trusted healthcare essentials, carefully chosen and delivered simply. A familiar pharmacy experience, now at your door.",
+    "ctaPrimary": "Shop Products",
+    "ctaSecondary": "Speak to a pharmacist",
+    "trustProducts": "Trusted products",
+    "trustDelivery": "Same-day Cairo delivery",
+    "cardLabel": "Your care kit",
+    "cardBadge": "Ready today",
+    "cardNoteLabel": "Pharmacist checked",
+    "cardNoteValue": "Here when you need us",
+    "cardBrand": "Omar",
+    "cardBrandSub": "Care kit",
+    "cardFooter": "A little more care in every delivery."
+  },
+  "home": {
+    "welcome": "Welcome to Omar Pharmacy",
+    "subtitle": "Your trusted partner in health and wellness",
+    "browseProducts": "Browse Products",
+    "contactUs": "Contact Us",
+    "whyChooseUs": "Why Choose Us?",
+    "qualityProducts": "Quality Products",
+    "qualityDescription": "We only offer the highest quality medicines and healthcare products",
+    "fastDelivery": "Fast Delivery",
+    "fastDeliveryDescription": "Quick and reliable delivery to your doorstep",
+    "support24_7": "24/7 Support",
+    "supportDescription": "Our team is always available to help you",
+    "popularCategories": "Popular Categories"
+  }
+}
