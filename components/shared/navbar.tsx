@@ -3,17 +3,25 @@
 import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { usePathname } from 'next/navigation';
-import { Search, ShoppingCart, Menu, X, Heart, Star, Globe } from 'lucide-react';
+import { ShoppingCart, Menu, X, Heart, Star, Globe } from 'lucide-react';
+import { useCart } from '@/context/cart-context';
+import type { ConfigData } from '@/services/config/config.interface';
 
 const locales = ['en', 'ar'];
 const localeLabels: Record<string, string> = { en: 'EN', ar: 'AR' };
 
-export default function Navbar() {
+interface NavbarProps {
+    config?: ConfigData | null;
+}
+
+export default function Navbar({ config }: NavbarProps) {
+    const siteName = config?.name || 'Omar Pharmacy';
     const t = useTranslations('navbar');
     const locale = useLocale();
     const pathname = usePathname();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const { itemCount } = useCart();
 
     const switchLocale = (nextLocale: string) => {
         if (nextLocale === locale) return;
@@ -64,7 +72,7 @@ export default function Navbar() {
                         <div
                             className={`transition-all duration-300 text-lg font-bold text-gray-800`}
                         >
-                            <span className="block">omar pharmacy</span>
+                            <span className="block">{siteName}</span>
                         </div>
                     </div>
 
@@ -91,12 +99,14 @@ export default function Navbar() {
                             <Globe className="w-4 h-4" />
                             {localeLabels[otherLocale]}
                         </button>
-                        <button className="p-2 text-gray-700 hover:text-blue-600 transition-colors relative" aria-label={t('cart')}>
+                        <a href="/cart" className="p-2 text-gray-700 hover:text-blue-600 transition-colors relative" aria-label={t('cart')}>
                             <ShoppingCart className="w-5 h-5" />
-                            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                                2
-                            </span>
-                        </button>
+                            {itemCount > 0 && (
+                                <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                                    {itemCount > 9 ? '9+' : itemCount}
+                                </span>
+                            )}
+                        </a>
                         {/* Mobile menu button */}
                         <button
                             className="md:hidden p-2 text-gray-700 hover:text-blue-600 transition-colors"

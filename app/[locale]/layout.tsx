@@ -7,6 +7,7 @@ import { cookies } from 'next/headers';
 import Navbar from '@/components/shared/navbar';
 import Footer from '@/components/shared/footer';
 import WhatsAppButton from '@/components/shared/whatsapp-button';
+import { CartProvider } from '@/context/cart-context';
 import { ConfigService } from '@/services/config/config.service';
 import { GUEST_SESSION_COOKIE } from '@/lib/guest-session';
 import type { ConfigData } from '@/services/config/config.interface';
@@ -53,14 +54,16 @@ export default async function LocaleLayout({
     >
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider messages={messages} locale={locale}>
-          <div className="flex flex-col min-h-screen">
-            <Navbar />
-            <main className="flex-1 pt-24 sm:pt-28">
-              {children}
-            </main>
-            <Footer config={config} />
-          </div>
-          <WhatsAppButton whatsappNumber={config?.whatsapp ?? null} />
+          <CartProvider>
+            <div className="flex flex-col min-h-screen">
+              <Navbar config={config} />
+              <main className="flex-1 pt-24 sm:pt-28">
+                {children}
+              </main>
+              <Footer config={config} />
+            </div>
+            <WhatsAppButton whatsappNumber={config?.whatsapp ?? null} />
+          </CartProvider>
         </NextIntlClientProvider>
       </body>
     </html>
