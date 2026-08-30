@@ -22,6 +22,7 @@ interface HomeProduct {
   primary_image: PrimaryImage | null;
   active_discount: ActiveDiscount | null;
   flag: "best_seller" | "popular" | "high_offer";
+  color: string | null;
 }
 
 interface ActiveDiscount {

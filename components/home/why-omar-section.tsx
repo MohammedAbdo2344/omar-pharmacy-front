@@ -18,7 +18,7 @@ export default async function WhyOmarSection({ config }: WhyOmarSectionProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Main card */}
-          <div className="md:col-span-1 bg-[#1c3a2e] rounded-3xl p-8 flex flex-col justify-between text-white">
+          <div className="md:col-span-1 bg-blue-950 rounded-3xl p-8 flex flex-col justify-between text-white">
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
@@ -53,11 +53,11 @@ export default async function WhyOmarSection({ config }: WhyOmarSectionProps) {
           </div>
 
           {/* Location card */}
-          <div className="bg-emerald-50 rounded-3xl p-8">
+          <div className="bg-blue-50 rounded-3xl p-8">
             <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm mb-6">
-              <MapPin className="w-5 h-5 text-emerald-600" />
+              <MapPin className="w-5 h-5 text-blue-950" />
             </div>
-            <h3 className="font-bold text-emerald-900 mb-1">{t('locationTitle')}</h3>
+            <h3 className="font-bold text-blue-950 mb-1">{t('locationTitle')}</h3>
             <p className="text-gray-500 text-sm">{address}</p>
           </div>
         </div>
@@ -76,7 +76,7 @@ export default async function WhyOmarSection({ config }: WhyOmarSectionProps) {
           </div>
           <a
             href={`https://wa.me/${phone}`}
-            className="shrink-0 inline-flex items-center gap-2 bg-[#1c3a2e] text-white px-6 py-3.5 rounded-full font-semibold hover:bg-[#163025] transition-colors"
+            className="shrink-0 inline-flex items-center gap-2 bg-blue-950 text-white px-6 py-3.5 rounded-full font-semibold hover:bg-blue-900 transition-colors"
           >
             <Phone className="w-4 h-4" />
             {t('contactPharmacist')}

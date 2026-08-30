@@ -22,7 +22,7 @@ export default async function PharmacistGuidanceSection({ config }: PharmacistGu
                 {t('badge')}
               </span>
             </div>
-            <h2 className="mt-4 text-4xl md:text-5xl font-serif text-blue-950 max-w-2xl leading-tight">
+            <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-blue-950 max-w-2xl leading-tight">
               {t('title')}
             </h2>
             <p className="mt-4 text-gray-500 max-w-2xl">{t('description')}</p>

@@ -15,16 +15,6 @@ interface ProductsShelfSectionProps {
   maxPrice?: string;
 }
 
-const palette = [
-  { card: 'from-blue-100 to-blue-50', icon: 'text-blue-600' },
-  { card: 'from-amber-100 to-amber-50', icon: 'text-amber-600' },
-  { card: 'from-indigo-100 to-indigo-50', icon: 'text-indigo-600' },
-  { card: 'from-rose-100 to-rose-50', icon: 'text-rose-600' },
-  { card: 'from-rose-100 to-rose-50', icon: 'text-rose-500' },
-  { card: 'from-emerald-100 to-emerald-50', icon: 'text-emerald-600' },
-  { card: 'from-violet-100 to-violet-50', icon: 'text-violet-600' },
-];
-
 export default async function ProductsShelfSection({
   data,
   categories,
@@ -104,11 +94,10 @@ export default async function ProductsShelfSection({
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-                {products.map((product, index) => (
+                {products.map((product) => (
                   <ProductCard
                     key={product.id}
                     product={product}
-                    colors={palette[index % palette.length]}
                     labels={{
                       currency: tResults('currency'),
                       off: (percent) => tResults('off', { percent }),

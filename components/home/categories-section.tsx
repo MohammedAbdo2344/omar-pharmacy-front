@@ -7,14 +7,16 @@ interface CategoriesSectionProps {
   categories: HomeCategory[];
 }
 
-const palette = [
-  'bg-blue-50 text-blue-600',
-  'bg-amber-50 text-amber-600',
-  'bg-purple-50 text-purple-600',
-  'bg-rose-50 text-rose-600',
-  'bg-sky-50 text-sky-600',
-  'bg-indigo-50 text-indigo-600',
-];
+const DEFAULT_CATEGORY_COLOR = '#ffe9ef';
+
+function getCategoryStyle(color: string | null) {
+  const backgroundColor = color || DEFAULT_CATEGORY_COLOR;
+  return {
+    style: { backgroundColor },
+    textClass: 'text-blue-950',
+    subTextClass: 'text-blue-700',
+  };
+}
 
 export default async function CategoriesSection({ categories }: CategoriesSectionProps) {
   const t = await getTranslations('categoriesSection');
@@ -56,13 +58,13 @@ export default async function CategoriesSection({ categories }: CategoriesSectio
         </a>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {categories.map((category, index) => {
-            const swatch = palette[index % palette.length];
+          {categories.map((category) => {
+            const categoryStyle = getCategoryStyle(category.color);
             return (
               <a
                 key={category.id}
-                href={`/categories/${category.slug}`}
-                className={`${swatch} rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all duration-300`}
+                style={categoryStyle.style}
+                className="rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
               >
                 <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm mb-5">
                   {category.image ? (
@@ -72,8 +74,8 @@ export default async function CategoriesSection({ categories }: CategoriesSectio
                     <Stethoscope className="w-5 h-5" />
                   )}
                 </div>
-                <h3 className="font-bold text-blue-950">{category.name}</h3>
-                <p className="text-xs text-blue-700 mt-1">{category.products_count} {t('products')}</p>
+                <h3 className={`font-bold ${categoryStyle.textClass}`}>{category.name}</h3>
+                <p className={`text-xs ${categoryStyle.subTextClass} mt-1`}>{category.products_count} {t('products')}</p>
               </a>
             );
           })}

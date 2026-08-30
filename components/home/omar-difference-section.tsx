@@ -22,7 +22,7 @@ export default async function OmarDifferenceSection() {
                 {t('badge')}
               </span>
             </div>
-            <h2 className="mt-4 text-4xl md:text-5xl font-serif text-blue-950">
+            <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-blue-950">
               {t('title')}
             </h2>
           </div>

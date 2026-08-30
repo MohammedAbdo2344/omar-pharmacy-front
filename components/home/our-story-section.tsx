@@ -24,7 +24,7 @@ export default async function OurStorySection({ config }: OurStorySectionProps) 
               </span>
             </div>
 
-            <h1 className="mt-6 text-5xl md:text-6xl font-serif leading-[1.05] tracking-tight">
+            <h1 className="mt-6 text-5xl md:text-6xl font-extrabold leading-[1.05] tracking-tight">
               <span className="block text-blue-950">{t('titleLine1')}</span>
               <span className="block text-blue-600 italic">{t('titleLine2')}</span>
             </h1>
@@ -72,7 +72,7 @@ export default async function OurStorySection({ config }: OurStorySectionProps) 
                 </span>
               </div>
 
-              <h2 className="mt-6 text-2xl font-serif leading-snug max-w-xs">
+              <h2 className="mt-6 text-2xl font-extrabold leading-snug max-w-xs">
                 {t('cardTitle')}
               </h2>
 
@@ -86,7 +86,7 @@ export default async function OurStorySection({ config }: OurStorySectionProps) 
                       {t('shelfNoteLabel')}
                     </span>
                   </div>
-                  <div className="mt-8 text-xl font-serif">
+                  <div className="mt-8 text-xl font-extrabold">
                     {t('shelfNoteTitle')}
                   </div>
                   <div className="mt-3 w-10 h-0.5 bg-amber-400" />
