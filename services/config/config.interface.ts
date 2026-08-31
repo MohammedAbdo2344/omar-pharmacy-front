@@ -1,0 +1,19 @@
+export interface ConfigData {
+  name: string | null;
+  logo: string | null;
+  favicon: string | null;
+  address: string | null;
+  phone: string | null;
+  email: string | null;
+  whatsapp: string | null;
+  working_hours: string | null;
+  instagram: string | null;
+  facebook: string | null;
+  x: string | null;
+  currency: string | null;
+  google_maps_url: string | null;
+  payment_cod_enabled: string | null;
+  payment_instapay_enabled: string | null;
+  payment_instapay_number: string | null;
+  payment_instapay_name: string | null;
+}
