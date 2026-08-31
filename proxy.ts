@@ -10,7 +10,7 @@ const intlMiddleware = createMiddleware({
   defaultLocale: 'en'
 });
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://dromarpharmacy-production.up.railway.app/api/v1';
+const API_BASE_URL = 'https://dromarpharmacy-production.up.railway.app/api/v1';
 
 export default async function proxy(request: NextRequest) {
   const response = intlMiddleware(request);

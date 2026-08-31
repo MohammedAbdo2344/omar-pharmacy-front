@@ -1,7 +1,7 @@
 import { BackendApiError } from "./errors";
 import type { ApiDataEnvelope, ApiErrorEnvelope } from "./types";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://dromarpharmacy-production.up.railway.app/api/v1';
+const API_BASE_URL = 'https://dromarpharmacy-production.up.railway.app/api/v1';
 
 export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
