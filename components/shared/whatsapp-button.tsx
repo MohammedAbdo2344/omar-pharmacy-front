@@ -1,3 +1,7 @@
+'use client';
+
+import { useConfig } from '@/providers/config-provider';
+
 function WhatsAppIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -7,14 +11,11 @@ function WhatsAppIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-interface WhatsAppButtonProps {
-  whatsappNumber?: string | null;
-}
-
 const DEFAULT_WHATSAPP_NUMBER = '201000000000';
 
-export default function WhatsAppButton({ whatsappNumber }: WhatsAppButtonProps) {
-  const digits = whatsappNumber?.replace(/\D/g, '');
+export default function WhatsAppButton() {
+  const { config } = useConfig();
+  const digits = config?.whatsapp?.replace(/\D/g, '');
   const number = digits || DEFAULT_WHATSAPP_NUMBER;
 
   return (

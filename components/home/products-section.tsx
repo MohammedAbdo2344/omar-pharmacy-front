@@ -1,4 +1,6 @@
-import { getTranslations } from 'next-intl/server';
+'use client';
+
+import { useTranslations } from 'next-intl';
 import { Stethoscope } from 'lucide-react';
 import type { HomeProduct } from '@/services/home/home.interface';
 import { resolveAssetUrl } from '@/lib/api/asset-url';
@@ -14,8 +16,8 @@ function getProductColor(color: string | null | undefined) {
   return color || DEFAULT_PRODUCT_COLOR;
 }
 
-export default async function ProductsSection({ products }: ProductsSectionProps) {
-  const t = await getTranslations('productsSection');
+export default function ProductsSection({ products }: ProductsSectionProps) {
+  const t = useTranslations('productsSection');
 
   if (products.length === 0) {
     return null;

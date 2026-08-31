@@ -1,13 +1,12 @@
-import { getTranslations } from 'next-intl/server';
+'use client';
+
+import { useTranslations } from 'next-intl';
 import { Clock, MapPin, ShieldCheck, ArrowRight, Phone } from 'lucide-react';
-import type { ConfigData } from '@/services/config/config.interface';
+import { useConfig } from '@/providers/config-provider';
 
-interface WhyOmarSectionProps {
-  config?: ConfigData | null;
-}
-
-export default async function WhyOmarSection({ config }: WhyOmarSectionProps) {
-  const t = await getTranslations('whyOmarSection');
+export default function WhyOmarSection() {
+  const t = useTranslations('whyOmarSection');
+  const { config } = useConfig();
 
   const address = config?.address || '12 El-Nasr Street, Cairo, Egypt';
   const workingHours = config?.working_hours || 'Open daily · 8:00 AM — 12:00 AM';

@@ -5,16 +5,13 @@ import { useTranslations, useLocale } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { ShoppingCart, Menu, X, Heart, Star, Globe } from 'lucide-react';
 import { useCart } from '@/context/cart-context';
-import type { ConfigData } from '@/services/config/config.interface';
+import { useConfig } from '@/providers/config-provider';
 
 const locales = ['en', 'ar'];
 const localeLabels: Record<string, string> = { en: 'EN', ar: 'AR' };
 
-interface NavbarProps {
-    config?: ConfigData | null;
-}
-
-export default function Navbar({ config }: NavbarProps) {
+export default function Navbar() {
+    const { config } = useConfig();
     const siteName = config?.name || 'Omar Pharmacy';
     const t = useTranslations('navbar');
     const locale = useLocale();

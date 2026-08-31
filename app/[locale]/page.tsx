@@ -1,46 +1,46 @@
-import { cookies } from 'next/headers';
+'use client';
+
+import { useEffect, useState } from 'react';
 import Hero from '@/components/home/hero';
 import CategoriesSection from '@/components/home/categories-section';
 import ProductsSection from '@/components/home/products-section';
 import WhyOmarSection from '@/components/home/why-omar-section';
 import { HomeService } from '@/services/home/home.service';
-import { ConfigService } from '@/services/config/config.service';
 import type { HomeData } from '@/services/home/home.interface';
-import type { ConfigData } from '@/services/config/config.interface';
-import { GUEST_SESSION_COOKIE } from '@/lib/guest-session';
+import { getGuestTokenClient } from '@/lib/guest-session';
 
-async function getHomeData(): Promise<HomeData | null> {
-  const cookieStore = await cookies();
-  const token = cookieStore.get(GUEST_SESSION_COOKIE)?.value;
+export default function HomePage() {
+  const [homeData, setHomeData] = useState<HomeData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  if (!token) {
-    return null;
+  useEffect(() => {
+    async function fetchData() {
+      const token = getGuestTokenClient();
+      if (!token) {
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        const homeResult = await HomeService.getHome(token).catch(() => null);
+        setHomeData(homeResult);
+      } catch {
+        // Handle errors silently
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-gray-500">Loading...</div>
+      </div>
+    );
   }
-
-  try {
-    return await HomeService.getHome(token);
-  } catch {
-    return null;
-  }
-}
-
-async function getConfigData(): Promise<ConfigData | null> {
-  const cookieStore = await cookies();
-  const token = cookieStore.get(GUEST_SESSION_COOKIE)?.value;
-
-  if (!token) {
-    return null;
-  }
-
-  try {
-    return await ConfigService.getConfig(token);
-  } catch {
-    return null;
-  }
-}
-
-export default async function HomePage() {
-  const [homeData, config] = await Promise.all([getHomeData(), getConfigData()]);
 
   return (
     <div className="min-h-screen">
@@ -54,7 +54,7 @@ export default async function HomePage() {
       <ProductsSection products={homeData?.products ?? []} />
 
       {/* Why Omar Section */}
-      <WhyOmarSection config={config} />
+      <WhyOmarSection />
     </div>
   );
 }
