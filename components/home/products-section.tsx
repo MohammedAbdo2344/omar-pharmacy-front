@@ -10,7 +10,7 @@ interface ProductsSectionProps {
   products: HomeProduct[];
 }
 
-function getProductColor(color: string | null) {
+function getProductColor(color: string | null | undefined) {
   return color || DEFAULT_PRODUCT_COLOR;
 }
 

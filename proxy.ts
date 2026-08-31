@@ -12,7 +12,7 @@ const intlMiddleware = createMiddleware({
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export default async function middleware(request: NextRequest) {
+export default async function proxy(request: NextRequest) {
   const response = intlMiddleware(request);
 
   if (!request.cookies.get(GUEST_SESSION_COOKIE) && API_BASE_URL) {
