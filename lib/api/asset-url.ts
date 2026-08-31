@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://dromarpharmacy-production.up.railway.app/api/v1';
 
 /** Origin of the backend, e.g. "http://localhost:8000" from "http://localhost:8000/api/v1". */
 const API_ORIGIN = API_BASE_URL ? new URL(API_BASE_URL).origin : "";
