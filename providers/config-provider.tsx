@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from '
 import { ConfigService } from '@/services/config/config.service';
 import type { ConfigData } from '@/services/config/config.interface';
 import { getGuestTokenClient } from '@/lib/guest-session';
+import BrandLoader from '@/components/shared/brand-loader';
 
 interface ConfigContextValue {
   config: ConfigData | null;
@@ -39,7 +40,7 @@ export function ConfigProvider({ children }: { children: ReactNode }) {
 
   return (
     <ConfigContext.Provider value={{ config, isLoading }}>
-      {children}
+      {isLoading ? <BrandLoader /> : children}
     </ConfigContext.Provider>
   );
 }

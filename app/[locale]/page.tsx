@@ -5,6 +5,7 @@ import Hero from '@/components/home/hero';
 import CategoriesSection from '@/components/home/categories-section';
 import ProductsSection from '@/components/home/products-section';
 import WhyOmarSection from '@/components/home/why-omar-section';
+import BrandLoader from '@/components/shared/brand-loader';
 import { HomeService } from '@/services/home/home.service';
 import type { HomeData } from '@/services/home/home.interface';
 import { getGuestTokenClient } from '@/lib/guest-session';
@@ -35,11 +36,7 @@ export default function HomePage() {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-gray-500">Loading...</div>
-      </div>
-    );
+    return <BrandLoader />;
   }
 
   return (

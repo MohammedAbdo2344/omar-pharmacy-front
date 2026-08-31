@@ -8,6 +8,11 @@
     "search": "Search",
     "cart": "Cart"
   },
+  "brandLoader": {
+    "name": "Omar Pharmacy",
+    "tagline": "Your trusted partner in health and wellness",
+    "loading": "Loading, please wait…"
+  },
   "categories": {
     "medicines": "Medicines",
     "supplements": "Supplements",
