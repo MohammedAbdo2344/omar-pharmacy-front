@@ -284,7 +284,10 @@
     "phonePlaceholder": "01X XXX XXXX",
     "messageLabel": "How can we help?",
     "messagePlaceholder": "A question about an order, product, or pharmacist guidance...",
-    "submit": "Send message"
+    "submit": "Send message",
+    "sending": "Sending...",
+    "sendSuccess": "Your message has been sent successfully.",
+    "sendError": "Something went wrong. Please try again."
   },
   "pharmacistGuidanceSection": {
     "badge": "Pharmacist guidance matters",
