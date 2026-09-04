@@ -27,14 +27,6 @@ export default async function ProductsSection({ products }: ProductsSectionProps
     return t('highOffer');
   };
 
-  const calculateDiscountedPrice = (originalPrice: number, discountValue: string, discountType: string) => {
-    const discountAmount = parseFloat(discountValue);
-    if (discountType === 'percentage') {
-      return (originalPrice * (1 - discountAmount / 100)).toFixed(2);
-    }
-    return (originalPrice - discountAmount).toFixed(2);
-  };
-
   return (
     <section className="py-16 bg-blue-50/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,10 +43,8 @@ export default async function ProductsSection({ products }: ProductsSectionProps
           {products.map((product) => {
             const productColor = getProductColor(product.color);
             const price = Number(product.price);
-            const hasDiscount = product.active_discount !== null;
-            const discountedPrice = hasDiscount && product.active_discount
-              ? calculateDiscountedPrice(price, product.active_discount.value, product.active_discount.type)
-              : null;
+            const finalPrice = Number(product.final_price);
+            const hasDiscount = product.discount_percentage > 0 && finalPrice < price;
 
             return (
               <a
@@ -66,9 +56,9 @@ export default async function ProductsSection({ products }: ProductsSectionProps
                   className="relative m-2.5 border border-blue-100 rounded-2xl p-6 h-48 flex items-center justify-center overflow-hidden"
                   style={{ backgroundColor: productColor }}
                 >
-                  {hasDiscount && product.active_discount && (
+                  {hasDiscount && (
                     <span className="absolute top-3 left-3 z-20 bg-amber-100 text-amber-700 text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 rounded-full">
-                      {t('off', { percent: product.active_discount.value })}
+                      {t('off', { percent: product.discount_percentage })}
                     </span>
                   )}
 
@@ -118,7 +108,7 @@ export default async function ProductsSection({ products }: ProductsSectionProps
                     <div className="flex flex-col">
                       <div className="flex items-baseline gap-2">
                         <span className="text-lg font-extrabold text-blue-700">
-                          {t('currency')} {discountedPrice || price}
+                          {t('currency')} {hasDiscount ? finalPrice.toFixed(2) : price}
                         </span>
                         {hasDiscount && (
                           <span className="text-sm text-gray-400 line-through">

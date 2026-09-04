@@ -41,11 +41,34 @@ function getProductColor(color: string | null | undefined) {
   return color || DEFAULT_PRODUCT_COLOR;
 }
 
+/** Computes the discounted price from an `active_discount` (percentage or fixed amount off). */
+function calculateDiscountedPrice(
+  originalPrice: number,
+  discount: { value?: string | number; type?: string } | null | undefined
+): number | null {
+  if (!discount || discount.value == null) return null;
+  const value = Number(discount.value);
+  if (Number.isNaN(value) || value <= 0) return null;
+  return discount.type === 'fixed' ? Math.max(originalPrice - value, 0) : originalPrice * (1 - value / 100);
+}
+
+/** Computes the "X% OFF" badge value for an `active_discount`, converting fixed amounts to a percentage. */
+function calculateDiscountPercent(
+  originalPrice: number,
+  discount: { value?: string | number; type?: string } | null | undefined
+): number | null {
+  if (!discount || discount.value == null || originalPrice <= 0) return null;
+  const value = Number(discount.value);
+  if (Number.isNaN(value) || value <= 0) return null;
+  return discount.type === 'fixed' ? Math.round((value / originalPrice) * 100) : value;
+}
+
 export default function ProductCard({ product, labels }: ProductCardProps) {
   const price = Number(product.price);
-  const finalPriceRaw = product.final_price ?? null;
-  const finalPrice = finalPriceRaw !== null ? Number(finalPriceRaw) : null;
-  const discountPercent = product.discount_percentage ?? product.active_discount?.value ?? null;
+  const explicitFinalPrice = product.final_price != null ? Number(product.final_price) : null;
+  const finalPrice = explicitFinalPrice ?? calculateDiscountedPrice(price, product.active_discount);
+  const discountPercent =
+    product.discount_percentage ?? calculateDiscountPercent(price, product.active_discount) ?? null;
   const hasDiscount = finalPrice !== null && finalPrice < price;
 
   const imageUrl = resolveAssetUrl(product.primary_image?.image ?? product.primary_image?.image_url);
@@ -126,7 +149,7 @@ export default function ProductCard({ product, labels }: ProductCardProps) {
         <div className="mt-auto pt-4 flex items-center justify-between">
           <div className="flex items-baseline gap-2">
             <span className="text-lg font-extrabold text-blue-950">
-              {labels.currency} {hasDiscount ? finalPrice : price}
+              {labels.currency} {hasDiscount ? finalPrice!.toFixed(2) : price}
             </span>
             {hasDiscount && (
               <span className="text-sm text-gray-400 line-through">
