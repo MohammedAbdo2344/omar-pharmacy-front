@@ -1,6 +1,4 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { Stethoscope } from 'lucide-react';
 import type { HomeProduct } from '@/services/home/home.interface';
 import { resolveAssetUrl } from '@/lib/api/asset-url';
@@ -16,8 +14,8 @@ function getProductColor(color: string | null | undefined) {
   return color || DEFAULT_PRODUCT_COLOR;
 }
 
-export default function ProductsSection({ products }: ProductsSectionProps) {
-  const t = useTranslations('productsSection');
+export default async function ProductsSection({ products }: ProductsSectionProps) {
+  const t = await getTranslations('productsSection');
 
   if (products.length === 0) {
     return null;
@@ -69,13 +67,13 @@ export default function ProductsSection({ products }: ProductsSectionProps) {
                   style={{ backgroundColor: productColor }}
                 >
                   {hasDiscount && product.active_discount && (
-                    <span className="absolute top-3 left-3 bg-amber-100 text-amber-700 text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 rounded-full">
+                    <span className="absolute top-3 left-3 z-20 bg-amber-100 text-amber-700 text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 rounded-full">
                       {t('off', { percent: product.active_discount.value })}
                     </span>
                   )}
 
                   {!hasDiscount && (
-                    <span className="absolute top-3 left-3 bg-amber-100 text-amber-700 text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 rounded-full">
+                    <span className="absolute top-3 left-3 z-20 bg-amber-100 text-amber-700 text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 rounded-full">
                       {flagLabel(product.flag)}
                     </span>
                   )}
@@ -88,12 +86,12 @@ export default function ProductsSection({ products }: ProductsSectionProps) {
                   {product.primary_image ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={resolveAssetUrl(product.primary_image.image) ?? undefined}
+                      src={resolveAssetUrl(product.primary_image.image_url) ?? undefined}
                       alt={product.primary_image.alt_text || product.name}
-                      className="relative z-10 w-24 h-32 object-contain drop-shadow-lg"
+                      className="relative z-10 w-full h-full object-contain drop-shadow-lg"
                     />
                   ) : (
-                    <div className="relative z-10 w-24 h-32 bg-white rounded-xl shadow-lg flex flex-col overflow-hidden">
+                    <div className="relative z-10 w-full h-full bg-white rounded-xl shadow-lg flex flex-col overflow-hidden">
                       <div className="flex-1 flex items-center justify-center bg-blue-50/60">
                         <Stethoscope className="w-6 h-6 text-blue-600" />
                       </div>

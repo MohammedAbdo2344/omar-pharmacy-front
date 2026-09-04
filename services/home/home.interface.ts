@@ -10,7 +10,7 @@ export interface HomeCategory {
 export interface PrimaryImage {
   id: number;
   product_id: number;
-  image: string;
+  image_url: string;
   alt_text: string;
   sort_order: number;
   is_primary: boolean;

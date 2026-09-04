@@ -19,7 +19,7 @@ export interface ProductListItem {
   is_popular?: boolean;
   is_featured?: boolean;
   requires_prescription?: boolean;
-  primary_image?: { image?: string | null; image_path?: string | null; alt_text?: string | null } | null;
+  primary_image?: { image?: string | null; image_url?: string | null; alt_text?: string | null } | null;
   active_discount?: { value?: string | number; type?: string } | null;
   categories?: { id: number; name: string }[];
   color?: string | null;
@@ -48,7 +48,7 @@ export default function ProductCard({ product, labels }: ProductCardProps) {
   const discountPercent = product.discount_percentage ?? product.active_discount?.value ?? null;
   const hasDiscount = finalPrice !== null && finalPrice < price;
 
-  const imageUrl = resolveAssetUrl(product.primary_image?.image ?? product.primary_image?.image_path);
+  const imageUrl = resolveAssetUrl(product.primary_image?.image ?? product.primary_image?.image_url);
   const categoryName = product.categories?.[0]?.name;
   const productColor = getProductColor(product.color);
 
@@ -69,7 +69,7 @@ export default function ProductCard({ product, labels }: ProductCardProps) {
         className="relative m-2.5 border border-blue-100/60 rounded-2xl p-6 h-48 flex items-center justify-center overflow-hidden"
         style={{ backgroundColor: productColor }}
       >
-        <div className="absolute top-3 left-3 flex items-center gap-1.5 flex-wrap">
+        <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 flex-wrap">
           {hasDiscount && discountPercent && (
             <span className="bg-white/90 text-amber-700 text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 rounded-full shadow-sm">
               {labels.off(discountPercent)}
@@ -101,10 +101,10 @@ export default function ProductCard({ product, labels }: ProductCardProps) {
           <img
             src={imageUrl}
             alt={product.primary_image?.alt_text || product.name}
-            className="relative z-10 w-24 h-32 object-contain drop-shadow-lg"
+            className="relative z-10 w-full h-full object-contain drop-shadow-lg"
           />
         ) : (
-          <div className="relative z-10 w-24 h-32 bg-white rounded-xl shadow-lg flex flex-col overflow-hidden">
+          <div className="relative z-10 w-full h-full bg-white rounded-xl shadow-lg flex flex-col overflow-hidden">
             <div className="flex-1 flex items-center justify-center bg-blue-50/60">
               <Stethoscope className="w-6 h-6 text-blue-600" />
             </div>

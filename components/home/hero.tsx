@@ -1,10 +1,8 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { Sparkles, ArrowRight, Phone, ShieldCheck, Truck, Heart, PackageCheck } from 'lucide-react';
 
-export default function Hero() {
-  const t = useTranslations('hero');
+export default async function Hero() {
+  const t = await getTranslations('hero');
 
   return (
     <section className="bg-blue-50/40">

@@ -61,6 +61,7 @@ export async function serviceRequest<T>(
     method,
     headers,
     body: body !== undefined ? JSON.stringify(body) : undefined,
+    cache: 'no-store',
   });
 
   const json = (await response.json().catch(() => ({}))) as Record<string, unknown>;
@@ -95,6 +96,7 @@ export async function serviceRequestMessage(
     method,
     headers,
     body: body !== undefined ? JSON.stringify(body) : undefined,
+    cache: 'no-store',
   });
 
   const json = (await response.json().catch(() => ({}))) as Record<string, unknown>;

@@ -1,7 +1,7 @@
 import { BackendApiError } from "./errors";
 import type { ApiDataEnvelope, ApiErrorEnvelope } from "./types";
 
-const API_BASE_URL = 'https://dromarpharmacy-production.up.railway.app/api/v1';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
@@ -58,6 +58,7 @@ export async function backendRequest<T>(
     method,
     headers,
     body: body !== undefined ? JSON.stringify(body) : undefined,
+    cache: "no-store",
   });
 
   const json = await response.json().catch(() => ({})) as Record<string, unknown>;
@@ -95,6 +96,7 @@ export async function backendRequestMessage(
     method,
     headers,
     body: body !== undefined ? JSON.stringify(body) : undefined,
+    cache: "no-store",
   });
 
   const json = await response.json().catch(() => ({})) as Record<string, unknown>;

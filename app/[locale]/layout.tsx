@@ -8,6 +8,9 @@ import Footer from '@/components/shared/footer';
 import WhatsAppButton from '@/components/shared/whatsapp-button';
 import { CartProvider } from '@/context/cart-context';
 import { ConfigProvider } from '@/providers/config-provider';
+import { ConfigServiceServer } from '@/services/config/config.service.server';
+import { getGuestTokenServer } from '@/lib/guest-session.server';
+import { resolveAssetUrl } from '@/lib/api/asset-url';
 import "../globals.css";
 
 const geistSans = Geist({
@@ -20,10 +23,37 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Omar Pharmacy",
-  description: "Your trusted partner in health and wellness",
-};
+const SITE_TITLE = "Omar Pharmacy";
+const SITE_DESCRIPTION = "Omar Pharmacy - Your trusted online pharmacy";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const token = await getGuestTokenServer();
+  const config = token ? await ConfigServiceServer.getConfig(token).catch(() => null) : null;
+  const favicon = resolveAssetUrl(config?.favicon);
+
+  return {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    keywords: [
+      "pharmacy",
+      "online pharmacy",
+      "Omar Pharmacy",
+      "medicines",
+      "health",
+    ],
+    icons: favicon ? { icon: favicon } : undefined,
+    openGraph: {
+      title: SITE_TITLE,
+      description: SITE_DESCRIPTION,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: SITE_TITLE,
+      description: SITE_DESCRIPTION,
+    },
+  };
+}
 
 const locales = ['en', 'ar'];
 
@@ -42,6 +72,10 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
 
+  const token = await getGuestTokenServer();
+  const config = token ? await ConfigServiceServer.getConfig(token).catch(() => null) : null;
+  const logo = resolveAssetUrl(config?.logo);
+
   return (
     <html
       lang={locale}
@@ -50,10 +84,10 @@ export default async function LocaleLayout({
     >
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider messages={messages} locale={locale}>
-          <ConfigProvider>
+          <ConfigProvider initialConfig={config}>
             <CartProvider>
               <div className="flex flex-col min-h-screen">
-                <Navbar />
+                <Navbar logo={logo} />
                 <main className="flex-1 pt-24 sm:pt-28">
                   {children}
                 </main>

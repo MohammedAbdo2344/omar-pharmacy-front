@@ -1,10 +1,7 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
-import { ConfigService } from '@/services/config/config.service';
+import { createContext, useContext, type ReactNode } from 'react';
 import type { ConfigData } from '@/services/config/config.interface';
-import { getGuestTokenClient } from '@/lib/guest-session';
-import BrandLoader from '@/components/shared/brand-loader';
 
 interface ConfigContextValue {
   config: ConfigData | null;
@@ -13,34 +10,16 @@ interface ConfigContextValue {
 
 const ConfigContext = createContext<ConfigContextValue | null>(null);
 
-export function ConfigProvider({ children }: { children: ReactNode }) {
-  const [config, setConfig] = useState<ConfigData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+interface ConfigProviderProps {
+  children: ReactNode;
+  /** Config fetched server-side (e.g. in the locale layout) and passed down to seed the context. */
+  initialConfig: ConfigData | null;
+}
 
-  useEffect(() => {
-    async function fetchConfig() {
-      const token = getGuestTokenClient();
-      if (!token) {
-        setIsLoading(false);
-        return;
-      }
-
-      try {
-        const configData = await ConfigService.getConfig(token);
-        setConfig(configData);
-      } catch {
-        // Handle errors silently
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchConfig();
-  }, []);
-
+export function ConfigProvider({ children, initialConfig }: ConfigProviderProps) {
   return (
-    <ConfigContext.Provider value={{ config, isLoading }}>
-      {isLoading ? <BrandLoader /> : children}
+    <ConfigContext.Provider value={{ config: initialConfig, isLoading: false }}>
+      {children}
     </ConfigContext.Provider>
   );
 }

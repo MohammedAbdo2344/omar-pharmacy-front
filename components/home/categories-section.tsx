@@ -1,6 +1,4 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { Stethoscope, ArrowRight } from 'lucide-react';
 import type { HomeCategory } from '@/services/home/home.interface';
 import { resolveAssetUrl } from '@/lib/api/asset-url';
@@ -20,8 +18,8 @@ function getCategoryStyle(color: string | null) {
   };
 }
 
-export default function CategoriesSection({ categories }: CategoriesSectionProps) {
-  const t = useTranslations('categoriesSection');
+export default async function CategoriesSection({ categories }: CategoriesSectionProps) {
+  const t = await getTranslations('categoriesSection');
 
   if (categories.length === 0) {
     return null;
