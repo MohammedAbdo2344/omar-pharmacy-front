@@ -145,7 +145,6 @@ export default async function ContactDetailsSection({ config }: ContactDetailsSe
 
             {/* Note form */}
             <ContactNoteForm
-              whatsapp={whatsapp}
               labels={{
                 title: t('formTitle'),
                 subtitle: t('formSubtitle'),
@@ -156,6 +155,9 @@ export default async function ContactDetailsSection({ config }: ContactDetailsSe
                 messageLabel: t('messageLabel'),
                 messagePlaceholder: t('messagePlaceholder'),
                 submit: t('submit'),
+                sending: t('sending'),
+                sendSuccess: t('sendSuccess'),
+                sendError: t('sendError'),
               }}
             />
           </div>

@@ -15,8 +15,8 @@ export interface ProductDetail {
   category_name?: string | null;
   category_id?: number | null;
   sku?: string | null;
-  primary_image?: { image?: string | null; image_path?: string | null; alt_text?: string | null } | null;
-  images?: { image?: string | null; image_path?: string | null; alt_text?: string | null }[] | null;
+  primary_image?: { image?: string | null; image_url?: string | null; alt_text?: string | null } | null;
+  images?: { image?: string | null; image_url?: string | null; alt_text?: string | null }[] | null;
   active_discount?: { value?: string | number; type?: string } | null;
   color?: string | null;
 }

@@ -12,10 +12,10 @@ const intlMiddleware = createMiddleware({
 
 const API_BASE_URL = "http://localhost:8000/api/v1";
 
-export default async function middleware(request: NextRequest) {
+export default async function proxy(request: NextRequest) {
   const response = intlMiddleware(request);
 
-  if (!request.cookies.get(GUEST_SESSION_COOKIE) && API_BASE_URL) {
+  if (!request.cookies.get(GUEST_SESSION_COOKIE)) {
     try {
       const backendResponse = await fetch(`${API_BASE_URL.replace(/\/$/, '')}/session`, {
         method: 'POST',

@@ -4,13 +4,7 @@ import { useTranslations } from 'next-intl';
 import { ChevronRight, ShieldCheck, ShoppingBag, ArrowRight, ArrowLeft, ShieldAlert } from 'lucide-react';
 import { useCart } from '@/context/cart-context';
 import CartItemRow from './cart-item-row';
-
-const palette = [
-  { card: 'bg-gradient-to-br from-blue-100 to-blue-50', icon: 'text-blue-600' },
-  { card: 'bg-gradient-to-br from-amber-100 to-amber-50', icon: 'text-amber-600' },
-  { card: 'bg-gradient-to-br from-indigo-100 to-indigo-50', icon: 'text-indigo-600' },
-  { card: 'bg-gradient-to-br from-rose-100 to-rose-50', icon: 'text-rose-600' },
-];
+import BrandLoader from '@/components/shared/brand-loader';
 
 export default function CartPageClient() {
   const t = useTranslations('cartPage');
@@ -45,14 +39,7 @@ export default function CartPageClient() {
         </div>
 
         {isLoading ? (
-          <div className="mt-14 grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2 space-y-4">
-              {[0, 1].map((i) => (
-                <div key={i} className="h-32 rounded-2xl bg-white border border-gray-100 animate-pulse" />
-              ))}
-            </div>
-            <div className="h-96 rounded-3xl bg-white border border-gray-100 animate-pulse" />
-          </div>
+          <BrandLoader fullScreen={false} />
         ) : items.length === 0 ? (
           <div className="mt-14 bg-white rounded-3xl border border-gray-100 p-16 text-center">
             <ShoppingBag className="w-10 h-10 text-blue-300 mx-auto" />
@@ -81,18 +68,9 @@ export default function CartPageClient() {
               </div>
 
               <div className="mt-5 space-y-4">
-                {items.map((item, index) => {
-                  const colors = palette[index % palette.length];
-                  return (
-                    <CartItemRow
-                      key={item.id}
-                      item={item}
-                      currency={t('currency')}
-                      cardBg={colors.card}
-                      iconColor={colors.icon}
-                    />
-                  );
-                })}
+                {items.map((item) => (
+                  <CartItemRow key={item.id} item={item} currency={t('currency')} />
+                ))}
               </div>
 
               <a

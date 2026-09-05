@@ -8,6 +8,11 @@
     "search": "بحث",
     "cart": "السلة"
   },
+  "brandLoader": {
+    "name": "صيدلية عمر",
+    "tagline": "شريكك الموثوق في الصحة والعافية",
+    "loading": "جارٍ التحميل، يرجى الانتظار…"
+  },
   "categories": {
     "medicines": "الأدوية",
     "supplements": "المكملات الغذائية",
@@ -279,7 +284,10 @@
     "phonePlaceholder": "01X XXX XXXX",
     "messageLabel": "كيف يمكننا المساعدة؟",
     "messagePlaceholder": "سؤال عن طلب أو منتج أو إرشاد من الصيدلي...",
-    "submit": "إرسال الرسالة"
+    "submit": "إرسال الرسالة",
+    "sending": "جارٍ الإرسال...",
+    "sendSuccess": "تم إرسال رسالتك بنجاح.",
+    "sendError": "حدث خطأ ما. حاول مرة أخرى."
   },
   "pharmacistGuidanceSection": {
     "badge": "إرشاد الصيدلي مهم",

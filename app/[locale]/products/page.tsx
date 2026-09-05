@@ -1,19 +1,9 @@
-import { cookies } from 'next/headers';
 import ProductsHeroSection from '@/components/products/products-hero-section';
 import ProductsShelfSection from '@/components/products/products-shelf-section';
-import { ProductsService } from '@/services/products/products.service';
-import { CategoriesService } from '@/services/categories/categories.service';
-import type { ProductListData } from '@/services/products/products.interface';
+import { ProductsServiceServer } from '@/services/products/products.service.server';
+import { CategoriesServiceServer } from '@/services/categories/categories.service.server';
 import type { CategoryRecord } from '@/services/categories/categories.interface';
-import { GUEST_SESSION_COOKIE } from '@/lib/guest-session';
-
-interface ProductsSearchParams {
-  search?: string;
-  page?: string;
-  category_id?: string;
-  max_price?: string;
-  sort_by_price?: string;
-}
+import { getGuestTokenServer } from '@/lib/guest-session.server';
 
 interface ProductsPageProps {
   params: Promise<{ locale: string }>;
@@ -56,9 +46,9 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
       <ProductsShelfSection
         data={data}
         categories={categories}
-        search={params.search}
-        categoryId={params.category_id}
-        maxPrice={params.max_price}
+        search={search}
+        categoryId={categoryId}
+        maxPrice={maxPrice}
       />
     </div>
   );

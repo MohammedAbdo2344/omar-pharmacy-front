@@ -11,7 +11,8 @@ interface CartProduct {
   final_price: number;
   stock_quantity: number;
   stock_availability: string;
-  primary_image: { id: number; image_path: string | null; is_primary: boolean } | null;
+  primary_image: { id: number; image_url: string | null; is_primary: boolean } | null;
+  color: string | null;
 }
 
 interface CartItem {

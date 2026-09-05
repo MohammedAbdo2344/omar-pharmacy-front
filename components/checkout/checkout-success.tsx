@@ -34,7 +34,7 @@ export default function CheckoutSuccess({ order, siteName, whatsappNumber, payme
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
       <div className="text-center">
-        <div className="w-20 h-20 rounded-3xl bg-emerald-50 flex items-center justify-center mx-auto">
+        <div className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto">
           <div className="w-14 h-14 rounded-full bg-blue-600 flex items-center justify-center">
             <Check className="w-7 h-7 text-white" />
           </div>
@@ -86,14 +86,14 @@ export default function CheckoutSuccess({ order, siteName, whatsappNumber, payme
           href={whatsappHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-6 flex items-center gap-4 bg-blue-600 text-white rounded-2xl px-6 py-5 hover:bg-blue-700 transition-colors"
+          className="mt-6 flex items-center gap-4 bg-green-50 text-green-950 rounded-2xl px-6 py-5 hover:bg-green-100 transition-colors"
         >
           <span className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center shrink-0">
             <MessageCircle className="w-5 h-5" />
           </span>
           <div className="flex-1">
             <div className="font-bold">{t('confirmOnWhatsapp')}</div>
-            <div className="text-sm text-blue-100">{t('confirmOnWhatsappSubtitle')}</div>
+            <div className="text-sm text-green-700">{t('confirmOnWhatsappSubtitle')}</div>
           </div>
           <ArrowRight className="w-5 h-5 rtl:rotate-180" />
         </a>
@@ -159,7 +159,7 @@ export default function CheckoutSuccess({ order, siteName, whatsappNumber, payme
           >
             <span className="flex items-center gap-2">
               <ShoppingBag className="w-4 h-4 text-blue-600" />
-              {t('continueShopping')}
+              {t('browseProducts')}
             </span>
             <ArrowRight className="w-4 h-4 rtl:rotate-180" />
           </a>
