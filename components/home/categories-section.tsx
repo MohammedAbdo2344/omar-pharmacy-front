@@ -67,9 +67,9 @@ export default async function CategoriesSection({ categories }: CategoriesSectio
                 className="rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
               >
                 <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm mb-5">
-                  {category.image ? (
+                  {category.image_url ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={resolveAssetUrl(category.image) ?? undefined} alt="" className="w-6 h-6 object-contain" />
+                    <img src={resolveAssetUrl(category.image_url) ?? undefined} alt="" className="w-6 h-6 object-contain" />
                   ) : (
                     <Stethoscope className="w-5 h-5" />
                   )}

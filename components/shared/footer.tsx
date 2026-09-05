@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { Heart, ArrowRight } from 'lucide-react';
-import type { ConfigData } from '@/services/config/config.interface';
+import { useConfig } from '@/providers/config-provider';
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -22,11 +22,8 @@ function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-interface FooterProps {
-  config?: ConfigData | null;
-}
-
-export default function Footer({ config }: FooterProps) {
+export default function Footer() {
+  const { config } = useConfig();
   const t = useTranslations('footer');
   const tNav = useTranslations('navbar');
 

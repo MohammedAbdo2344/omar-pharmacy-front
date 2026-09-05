@@ -5,16 +5,17 @@ import { useTranslations, useLocale } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { ShoppingCart, Menu, X, Heart, Star, Globe } from 'lucide-react';
 import { useCart } from '@/context/cart-context';
-import type { ConfigData } from '@/services/config/config.interface';
+import { useConfig } from '@/providers/config-provider';
 
 const locales = ['en', 'ar'];
 const localeLabels: Record<string, string> = { en: 'EN', ar: 'AR' };
 
 interface NavbarProps {
-    config?: ConfigData | null;
+    logo: string | null;
 }
 
-export default function Navbar({ config }: NavbarProps) {
+export default function Navbar({ logo }: NavbarProps) {
+    const { config } = useConfig();
     const siteName = config?.name || 'Omar Pharmacy';
     const t = useTranslations('navbar');
     const locale = useLocale();
@@ -61,14 +62,23 @@ export default function Navbar({ config }: NavbarProps) {
                 <div className="flex items-center justify-between">
                     {/* Logo */}
                     <div className="shrink-0 flex items-center gap-2">
-                        <div
-                            className={`transition-all duration-300 relative w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center`}
-                        >
-                            <Heart className={`${isScrolled ? 'w-5 h-5' : 'w-6 h-6'} text-white fill-current`} />
-                            <div className="absolute -top-1 -right-1 bg-yellow-400 rounded-full p-1">
-                                <Star className="w-3 h-3 text-yellow-900 fill-current" />
+                        {logo ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                                src={logo}
+                                alt={siteName}
+                                className={`transition-all duration-300 rounded-full object-cover ${isScrolled ? 'w-8 h-8' : 'w-10 h-10'}`}
+                            />
+                        ) : (
+                            <div
+                                className={`transition-all duration-300 relative w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center`}
+                            >
+                                <Heart className={`${isScrolled ? 'w-5 h-5' : 'w-6 h-6'} text-white fill-current`} />
+                                <div className="absolute -top-1 -right-1 bg-yellow-400 rounded-full p-1">
+                                    <Star className="w-3 h-3 text-yellow-900 fill-current" />
+                                </div>
                             </div>
-                        </div>
+                        )}
                         <div
                             className={`transition-all duration-300 text-lg font-bold text-gray-800`}
                         >

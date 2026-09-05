@@ -1,10 +1,11 @@
 'use client';
 
 import { useState, type FormEvent } from 'react';
-import { Send } from 'lucide-react';
+import { Send, Loader2 } from 'lucide-react';
+import { ContactService } from '@/services/contact/contact.service';
+import { getGuestTokenClient } from '@/lib/guest-session';
 
 interface ContactNoteFormProps {
-  whatsapp: string;
   labels: {
     title: string;
     subtitle: string;
@@ -15,22 +16,38 @@ interface ContactNoteFormProps {
     messageLabel: string;
     messagePlaceholder: string;
     submit: string;
+    sending: string;
+    sendSuccess: string;
+    sendError: string;
   };
 }
 
-export default function ContactNoteForm({ whatsapp, labels }: ContactNoteFormProps) {
+export default function ContactNoteForm({ labels }: ContactNoteFormProps) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (status === 'submitting') return;
 
-    const text = [`${labels.nameLabel}: ${name}`, `${labels.phoneLabel}: ${phone}`, '', message]
-      .filter(Boolean)
-      .join('\n');
+    const token = getGuestTokenClient();
+    if (!token) {
+      setStatus('error');
+      return;
+    }
 
-    window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+    setStatus('submitting');
+    try {
+      await ContactService.sendMessage(token, { name, phone, message });
+      setStatus('success');
+      setName('');
+      setPhone('');
+      setMessage('');
+    } catch {
+      setStatus('error');
+    }
   }
 
   return (
@@ -78,11 +95,23 @@ export default function ContactNoteForm({ whatsapp, labels }: ContactNoteFormPro
 
         <button
           type="submit"
-          className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-4 rounded-full font-semibold hover:bg-blue-700 transition-colors"
+          disabled={status === 'submitting'}
+          className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-4 rounded-full font-semibold hover:bg-blue-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          <Send className="w-4 h-4 rtl:-rotate-90" />
-          {labels.submit}
+          {status === 'submitting' ? (
+            <Loader2 className="w-4 h-4 animate-spin" />
+          ) : (
+            <Send className="w-4 h-4 rtl:-rotate-90" />
+          )}
+          {status === 'submitting' ? labels.sending : labels.submit}
         </button>
+
+        {status === 'success' && (
+          <p className="text-sm font-medium text-emerald-600 text-center">{labels.sendSuccess}</p>
+        )}
+        {status === 'error' && (
+          <p className="text-sm font-medium text-red-500 text-center">{labels.sendError}</p>
+        )}
       </form>
     </div>
   );

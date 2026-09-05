@@ -6,17 +6,18 @@ import { resolveAssetUrl } from '@/lib/api/asset-url';
 import type { CartItemRecord } from '@/services/cart/cart.interface';
 import { useCart } from '@/context/cart-context';
 
+const DEFAULT_PRODUCT_COLOR = '#e0f2fe';
+
 interface CartItemRowProps {
   item: CartItemRecord;
   currency: string;
-  cardBg: string;
-  iconColor: string;
 }
 
-export default function CartItemRow({ item, currency, cardBg, iconColor }: CartItemRowProps) {
+export default function CartItemRow({ item, currency }: CartItemRowProps) {
   const { updateQuantity, removeItem, isMutating } = useCart();
   const [isUpdating, setIsUpdating] = useState(false);
-  const imageUrl = resolveAssetUrl(item.product.primary_image?.image_path);
+  const imageUrl = resolveAssetUrl(item.product.primary_image?.image_url);
+  const cardColor = item.product.color || DEFAULT_PRODUCT_COLOR;
 
   const handleQuantityChange = async (nextQuantity: number) => {
     if (nextQuantity < 1 || isUpdating) return;
@@ -40,17 +41,20 @@ export default function CartItemRow({ item, currency, cardBg, iconColor }: CartI
 
   return (
     <div className="bg-white rounded-2xl border border-gray-100 p-4 sm:p-5 flex items-center gap-5">
-      <div className={`relative w-20 h-24 shrink-0 rounded-xl ${cardBg} flex items-center justify-center overflow-hidden`}>
+      <div
+        className="relative w-20 h-24 shrink-0 rounded-xl flex items-center justify-center overflow-hidden"
+        style={{ backgroundColor: cardColor }}
+      >
         {imageUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={imageUrl} alt={item.product.name} className="w-14 h-20 object-contain drop-shadow" />
         ) : (
           <div className="w-14 h-20 bg-white rounded-lg shadow flex flex-col overflow-hidden">
             <div className="flex-1 flex items-center justify-center">
-              <Stethoscope className={`w-5 h-5 ${iconColor}`} />
+              <Stethoscope className="w-5 h-5 text-blue-600" />
             </div>
             <div className="py-1.5 text-center">
-              <div className={`text-[9px] font-bold tracking-wide ${iconColor}`}>OMAR</div>
+              <div className="text-[9px] font-bold tracking-wide text-blue-600">OMAR</div>
               <div className="text-[8px] text-gray-400">{item.product.stock_availability}</div>
             </div>
           </div>

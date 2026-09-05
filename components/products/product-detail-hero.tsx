@@ -12,7 +12,7 @@ interface ProductDetailHeroProps {
   product: ProductDetail;
 }
 
-function getProductColor(color: string | null) {
+function getProductColor(color: string | null | undefined) {
   return color || DEFAULT_PRODUCT_COLOR;
 }
 
@@ -36,7 +36,7 @@ export default async function ProductDetailHero({ product }: ProductDetailHeroPr
         : []
   )
     .map((img) => ({
-      url: resolveAssetUrl(img.image ?? img.image_path),
+      url: resolveAssetUrl(img.image ?? img.image_url),
       alt: img.alt_text || product.name,
     }))
     .filter((img): img is { url: string; alt: string } => Boolean(img.url));

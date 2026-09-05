@@ -19,7 +19,7 @@ export interface ProductListItem {
   is_popular?: boolean;
   is_featured?: boolean;
   requires_prescription?: boolean;
-  primary_image?: { image?: string | null; image_path?: string | null; alt_text?: string | null } | null;
+  primary_image?: { image?: string | null; image_url?: string | null; alt_text?: string | null } | null;
   active_discount?: { value?: string | number; type?: string } | null;
   categories?: { id: number; name: string }[];
   color?: string | null;
@@ -37,18 +37,41 @@ interface ProductCardProps {
   };
 }
 
-function getProductColor(color: string | null) {
+function getProductColor(color: string | null | undefined) {
   return color || DEFAULT_PRODUCT_COLOR;
+}
+
+/** Computes the discounted price from an `active_discount` (percentage or fixed amount off). */
+function calculateDiscountedPrice(
+  originalPrice: number,
+  discount: { value?: string | number; type?: string } | null | undefined
+): number | null {
+  if (!discount || discount.value == null) return null;
+  const value = Number(discount.value);
+  if (Number.isNaN(value) || value <= 0) return null;
+  return discount.type === 'fixed' ? Math.max(originalPrice - value, 0) : originalPrice * (1 - value / 100);
+}
+
+/** Computes the "X% OFF" badge value for an `active_discount`, converting fixed amounts to a percentage. */
+function calculateDiscountPercent(
+  originalPrice: number,
+  discount: { value?: string | number; type?: string } | null | undefined
+): number | null {
+  if (!discount || discount.value == null || originalPrice <= 0) return null;
+  const value = Number(discount.value);
+  if (Number.isNaN(value) || value <= 0) return null;
+  return discount.type === 'fixed' ? Math.round((value / originalPrice) * 100) : value;
 }
 
 export default function ProductCard({ product, labels }: ProductCardProps) {
   const price = Number(product.price);
-  const finalPriceRaw = product.final_price ?? null;
-  const finalPrice = finalPriceRaw !== null ? Number(finalPriceRaw) : null;
-  const discountPercent = product.discount_percentage ?? product.active_discount?.value ?? null;
+  const explicitFinalPrice = product.final_price != null ? Number(product.final_price) : null;
+  const finalPrice = explicitFinalPrice ?? calculateDiscountedPrice(price, product.active_discount);
+  const discountPercent =
+    product.discount_percentage ?? calculateDiscountPercent(price, product.active_discount) ?? null;
   const hasDiscount = finalPrice !== null && finalPrice < price;
 
-  const imageUrl = resolveAssetUrl(product.primary_image?.image ?? product.primary_image?.image_path);
+  const imageUrl = resolveAssetUrl(product.primary_image?.image ?? product.primary_image?.image_url);
   const categoryName = product.categories?.[0]?.name;
   const productColor = getProductColor(product.color);
 
@@ -69,7 +92,7 @@ export default function ProductCard({ product, labels }: ProductCardProps) {
         className="relative m-2.5 border border-blue-100/60 rounded-2xl p-6 h-48 flex items-center justify-center overflow-hidden"
         style={{ backgroundColor: productColor }}
       >
-        <div className="absolute top-3 left-3 flex items-center gap-1.5 flex-wrap">
+        <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 flex-wrap">
           {hasDiscount && discountPercent && (
             <span className="bg-white/90 text-amber-700 text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 rounded-full shadow-sm">
               {labels.off(discountPercent)}
@@ -101,10 +124,10 @@ export default function ProductCard({ product, labels }: ProductCardProps) {
           <img
             src={imageUrl}
             alt={product.primary_image?.alt_text || product.name}
-            className="relative z-10 w-24 h-32 object-contain drop-shadow-lg"
+            className="relative z-10 w-full h-full object-contain drop-shadow-lg"
           />
         ) : (
-          <div className="relative z-10 w-24 h-32 bg-white rounded-xl shadow-lg flex flex-col overflow-hidden">
+          <div className="relative z-10 w-full h-full bg-white rounded-xl shadow-lg flex flex-col overflow-hidden">
             <div className="flex-1 flex items-center justify-center bg-blue-50/60">
               <Stethoscope className="w-6 h-6 text-blue-600" />
             </div>
@@ -126,7 +149,7 @@ export default function ProductCard({ product, labels }: ProductCardProps) {
         <div className="mt-auto pt-4 flex items-center justify-between">
           <div className="flex items-baseline gap-2">
             <span className="text-lg font-extrabold text-blue-950">
-              {labels.currency} {hasDiscount ? finalPrice : price}
+              {labels.currency} {hasDiscount ? finalPrice!.toFixed(2) : price}
             </span>
             {hasDiscount && (
               <span className="text-sm text-gray-400 line-through">
