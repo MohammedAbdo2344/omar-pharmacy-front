@@ -3,9 +3,14 @@ import ContactDetailsSection from '@/components/contact/contact-details-section'
 import { ConfigServiceServer } from '@/services/config/config.service.server';
 import { getGuestTokenServer } from '@/lib/guest-session.server';
 
-export default async function ContactPage() {
+interface ContactPageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function ContactPage({ params }: ContactPageProps) {
+  const { locale } = await params;
   const token = await getGuestTokenServer();
-  const config = token ? await ConfigServiceServer.getConfig(token).catch(() => null) : null;
+  const config = token ? await ConfigServiceServer.getConfig(token, locale).catch(() => null) : null;
 
   return (
     <div className="min-h-screen">
