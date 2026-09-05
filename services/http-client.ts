@@ -3,12 +3,26 @@ import type { ApiDataEnvelope, ApiErrorEnvelope } from "@/lib/api/types";
 
 export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
+const SUPPORTED_LOCALES = ["en", "ar"] as const;
+const DEFAULT_LOCALE = "en";
+
 interface ServiceRequestOptions {
   method?: HttpMethod;
   body?: unknown;
   query?: Record<string, string | number | undefined | null>;
   /** Guest session token, sent as `Authorization: Bearer <token>` to our /app/api layer. */
   token?: string | null;
+  /** Overrides the auto-detected route locale. Usually left unset — the current `/[locale]/...` segment is used. */
+  locale?: string | null;
+}
+
+/** Reads the current locale from the `/[locale]/...` URL segment so callers never have to pass it manually. */
+function getCurrentLocale(): string {
+  if (typeof window === "undefined") {
+    return DEFAULT_LOCALE;
+  }
+  const segment = window.location.pathname.split("/")[1];
+  return (SUPPORTED_LOCALES as readonly string[]).includes(segment) ? segment : DEFAULT_LOCALE;
 }
 
 function getBaseUrl(): string {
@@ -37,10 +51,11 @@ export async function serviceRequest<T>(
   path: string,
   options: ServiceRequestOptions = {}
 ): Promise<T> {
-  const { method = "GET", body, query, token } = options;
+  const { method = "GET", body, query, token, locale } = options;
 
   const headers: Record<string, string> = {
     Accept: "application/json",
+    Locale: locale ?? getCurrentLocale(),
   };
 
   if (body !== undefined) {
@@ -71,10 +86,11 @@ export async function serviceRequestMessage(
   path: string,
   options: ServiceRequestOptions = {}
 ): Promise<{ code: number; message: string; success: boolean; status: number }> {
-  const { method = "GET", body, query, token } = options;
+  const { method = "GET", body, query, token, locale } = options;
 
   const headers: Record<string, string> = {
     Accept: "application/json",
+    Locale: locale ?? getCurrentLocale(),
   };
 
   if (body !== undefined) {

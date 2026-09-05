@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { backendRequest, extractBearerToken } from "@/lib/api/backend-client";
+import { backendRequest, extractBearerToken, extractLocale } from "@/lib/api/backend-client";
 import { handleRouteError } from "@/lib/api/route-helpers";
 
 interface ProductPagination {
@@ -21,6 +21,7 @@ export async function GET(request: NextRequest) {
 
     const result = await backendRequest<ProductListData>("/products", {
       token,
+      locale: extractLocale(request),
       query: {
         category_id: searchParams.get("category_id") ?? undefined,
         min_price: searchParams.get("min_price") ?? undefined,

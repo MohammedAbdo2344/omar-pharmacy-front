@@ -1,7 +1,11 @@
 import { BackendApiError } from "./errors";
 import type { ApiDataEnvelope, ApiErrorEnvelope } from "./types";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api/v1";
+
+export const SUPPORTED_LOCALES = ["en", "ar"] as const;
+export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
+const DEFAULT_LOCALE: SupportedLocale = "en";
 
 export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
@@ -11,6 +15,19 @@ interface BackendRequestOptions {
   query?: Record<string, string | number | undefined | null>;
   /** Bearer token forwarded from the client's `Authorization` header. */
   token?: string | null;
+  /** Current route locale (`en`/`ar`), sent to Laravel as the `Locale` header. */
+  locale?: string | null;
+}
+
+function resolveLocale(locale?: string | null): SupportedLocale {
+  return (SUPPORTED_LOCALES as readonly string[]).includes(locale ?? "")
+    ? (locale as SupportedLocale)
+    : DEFAULT_LOCALE;
+}
+
+/** Extracts the `Locale` header from an incoming Next.js request, validated against SUPPORTED_LOCALES. */
+export function extractLocale(request: Request): SupportedLocale {
+  return resolveLocale(request.headers.get("locale"));
 }
 
 function buildUrl(path: string, query?: BackendRequestOptions["query"]): string {
@@ -40,10 +57,11 @@ export async function backendRequest<T>(
   path: string,
   options: BackendRequestOptions = {}
 ): Promise<ApiDataEnvelope<T>> {
-  const { method = "GET", body, query, token } = options;
+  const { method = "GET", body, query, token, locale } = options;
 
   const headers: Record<string, string> = {
     Accept: "application/json",
+    Locale: resolveLocale(locale),
   };
 
   if (body !== undefined) {
@@ -77,10 +95,11 @@ export async function backendRequestMessage(
   path: string,
   options: BackendRequestOptions = {}
 ): Promise<{ code: number; message: string; success: boolean; status: number }> {
-  const { method = "GET", body, query, token } = options;
+  const { method = "GET", body, query, token, locale } = options;
 
   const headers: Record<string, string> = {
     Accept: "application/json",
+    Locale: resolveLocale(locale),
   };
 
   if (body !== undefined) {

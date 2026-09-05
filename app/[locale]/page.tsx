@@ -39,8 +39,14 @@ async function getConfigData(): Promise<ConfigData | null> {
   }
 }
 
-export default async function HomePage() {
-  const [homeData, config] = await Promise.all([getHomeData(), getConfigData()]);
+interface HomePageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function HomePage({ params }: HomePageProps) {
+  const { locale } = await params;
+  const token = await getGuestTokenServer();
+  const homeData = token ? await HomeServiceServer.getHome(token, locale).catch(() => null) : null;
 
   return (
     <div className="min-h-screen">

@@ -10,7 +10,7 @@ const intlMiddleware = createMiddleware({
   defaultLocale: 'en'
 });
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_BASE_URL = "http://localhost:8000/api/v1";
 
 export default async function middleware(request: NextRequest) {
   const response = intlMiddleware(request);

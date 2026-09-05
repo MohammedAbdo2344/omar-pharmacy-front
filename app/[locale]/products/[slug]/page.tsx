@@ -11,33 +11,27 @@ import type { ProductListItem } from '@/components/products/product-card';
 import type { ConfigData } from '@/services/config/config.interface';
 
 interface ProductDetailPageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }
 
 export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
-  const { slug } = await params;
-  const cookieStore = await cookies();
-  const token = cookieStore.get(GUEST_SESSION_COOKIE)?.value;
+  const { slug, locale } = await params;
+  const token = await getGuestTokenServer();
 
-  if (!token) {
-    notFound();
+  if (!token || !slug) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <p className="text-lg text-muted-foreground">Product not found.</p>
+      </div>
+    );
   }
 
-  let product: ProductDetail | null = null;
-  let relatedProducts: ProductListItem[] = [];
-  let config: ConfigData | null = null;
+  const [detail, config] = await Promise.all([
+    ProductsServiceServer.getProductBySlug(token, slug, locale).catch(() => null),
+    ConfigServiceServer.getConfig(token, locale).catch(() => null),
+  ]);
 
-  try {
-    const [detail, configData] = await Promise.all([
-      ProductsService.getProductBySlug(token, slug),
-      ConfigService.getConfig(token).catch(() => null),
-    ]);
-    product = detail.product as unknown as ProductDetail;
-    relatedProducts = detail.related_products as unknown as ProductListItem[];
-    config = configData;
-  } catch {
-    notFound();
-  }
+  const product = detail?.product as unknown as ProductDetail | undefined;
 
   if (!product) {
     notFound();
