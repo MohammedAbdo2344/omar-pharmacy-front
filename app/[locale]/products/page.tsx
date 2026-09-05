@@ -27,6 +27,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
           search: search || undefined,
           page: page ? Number(page) : undefined,
           category_id: categoryId ? Number(categoryId) : undefined,
+          min_price: maxPrice ? 0 : undefined,
           max_price: maxPrice ? Number(maxPrice) : undefined,
           sort_by_price:
             sortByPrice === 'low_to_high' || sortByPrice === 'high_to_low' ? sortByPrice : undefined,
