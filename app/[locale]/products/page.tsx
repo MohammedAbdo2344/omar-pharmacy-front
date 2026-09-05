@@ -6,6 +6,7 @@ import type { CategoryRecord } from '@/services/categories/categories.interface'
 import { getGuestTokenServer } from '@/lib/guest-session.server';
 
 interface ProductsPageProps {
+  params: Promise<{ locale: string }>;
   searchParams: Promise<{
     search?: string;
     category_id?: string;
@@ -15,7 +16,8 @@ interface ProductsPageProps {
   }>;
 }
 
-export default async function ProductsPage({ searchParams }: ProductsPageProps) {
+export default async function ProductsPage({ params, searchParams }: ProductsPageProps) {
+  const { locale } = await params;
   const { search, category_id: categoryId, max_price: maxPrice, page, sort_by_price: sortByPrice } =
     await searchParams;
 
@@ -31,9 +33,11 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
           max_price: maxPrice ? Number(maxPrice) : undefined,
           sort_by_price:
             sortByPrice === 'low_to_high' || sortByPrice === 'high_to_low' ? sortByPrice : undefined,
-        }).catch(() => null)
+        }, locale).catch(() => null)
       : null,
-    token ? CategoriesServiceServer.getCategories(token).catch(() => [] as CategoryRecord[]) : ([] as CategoryRecord[]),
+    token
+      ? CategoriesServiceServer.getCategories(token, locale).catch(() => [] as CategoryRecord[])
+      : ([] as CategoryRecord[]),
   ]);
 
   return (

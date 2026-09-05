@@ -4,9 +4,14 @@ import PharmacistGuidanceSection from '@/components/home/pharmacist-guidance-sec
 import { ConfigServiceServer } from '@/services/config/config.service.server';
 import { getGuestTokenServer } from '@/lib/guest-session.server';
 
-export default async function AboutPage() {
+interface AboutPageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function AboutPage({ params }: AboutPageProps) {
+  const { locale } = await params;
   const token = await getGuestTokenServer();
-  const config = token ? await ConfigServiceServer.getConfig(token).catch(() => null) : null;
+  const config = token ? await ConfigServiceServer.getConfig(token, locale).catch(() => null) : null;
 
   return (
     <div className="min-h-screen">

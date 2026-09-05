@@ -5,9 +5,14 @@ import WhyOmarSection from '@/components/home/why-omar-section';
 import { HomeServiceServer } from '@/services/home/home.service.server';
 import { getGuestTokenServer } from '@/lib/guest-session.server';
 
-export default async function HomePage() {
+interface HomePageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function HomePage({ params }: HomePageProps) {
+  const { locale } = await params;
   const token = await getGuestTokenServer();
-  const homeData = token ? await HomeServiceServer.getHome(token).catch(() => null) : null;
+  const homeData = token ? await HomeServiceServer.getHome(token, locale).catch(() => null) : null;
 
   return (
     <div className="min-h-screen">

@@ -26,9 +26,14 @@ const geistMono = Geist_Mono({
 const SITE_TITLE = "Omar Pharmacy";
 const SITE_DESCRIPTION = "Omar Pharmacy - Your trusted online pharmacy";
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
   const token = await getGuestTokenServer();
-  const config = token ? await ConfigServiceServer.getConfig(token).catch(() => null) : null;
+  const config = token ? await ConfigServiceServer.getConfig(token, locale).catch(() => null) : null;
   const favicon = resolveAssetUrl(config?.favicon);
 
   return {
@@ -73,7 +78,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   const token = await getGuestTokenServer();
-  const config = token ? await ConfigServiceServer.getConfig(token).catch(() => null) : null;
+  const config = token ? await ConfigServiceServer.getConfig(token, locale).catch(() => null) : null;
   const logo = resolveAssetUrl(config?.logo);
 
   return (

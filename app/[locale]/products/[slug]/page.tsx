@@ -8,11 +8,11 @@ import type { ProductDetail } from '@/components/products/product-detail.types';
 import type { ProductListItem } from '@/components/products/product-card';
 
 interface ProductDetailPageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }
 
 export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const token = await getGuestTokenServer();
 
   if (!token || !slug) {
@@ -24,8 +24,8 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
   }
 
   const [detail, config] = await Promise.all([
-    ProductsServiceServer.getProductBySlug(token, slug).catch(() => null),
-    ConfigServiceServer.getConfig(token).catch(() => null),
+    ProductsServiceServer.getProductBySlug(token, slug, locale).catch(() => null),
+    ConfigServiceServer.getConfig(token, locale).catch(() => null),
   ]);
 
   const product = detail?.product as unknown as ProductDetail | undefined;
