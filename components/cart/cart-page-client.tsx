@@ -100,6 +100,10 @@ export default function CartPageClient() {
                   <span className="text-gray-500">{t('subtotal')}</span>
                   <span className="font-semibold text-blue-950">{t('currency')} {total}</span>
                 </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-500">{t('deliveryFee')}</span>
+                  <span className="font-semibold text-blue-950">{t('deliveryFeeValue')}</span>
+                </div>
               </div>
 
               <div className="mt-6 pt-6 border-t border-blue-100 flex items-center justify-between">

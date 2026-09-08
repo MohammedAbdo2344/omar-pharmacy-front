@@ -8,6 +8,9 @@
     "search": "بحث",
     "cart": "السلة"
   },
+  "phoneButton": {
+    "ariaLabel": "اتصل بنا"
+  },
   "brandLoader": {
     "name": "صيدلية عمر",
     "tagline": "شريكك الموثوق في الصحة والعافية",
@@ -43,7 +46,7 @@
     "ctaPrimary": "تسوق المنتجات",
     "ctaSecondary": "تحدث مع صيدلي",
     "trustProducts": "منتجات موثوقة",
-    "trustDelivery": "توصيل في نفس اليوم بالقاهرة",
+    "trustDelivery": "توصيل مجاني في نفس اليوم بحدايق الاهرام",
     "cardLabel": "عبوة العناية الخاصة بك",
     "cardBadge": "جاهزة اليوم",
     "cardNoteLabel": "تم فحصها من قبل الصيدلي",
@@ -66,7 +69,7 @@
     "ctaPrimary": "لماذا يختارنا عملاؤنا",
     "ctaSecondary": "تحدث مع فريقنا",
     "trustService": "خدمة صيدلية مدروسة",
-    "trustLocation": "نخدم القاهرة يومياً",
+    "trustLocation": "نخدم حدايق الاهرام يومياً",
     "cardLabel": "داخل صيدلية عمر",
     "cardTitle": "لمسة إنسانية أكثر في كل طلب.",
     "shelfNoteLabel": "ملاحظة الرف",
@@ -85,7 +88,7 @@
     },
     "delivery": {
       "title": "توصيل سريع وحريص",
-      "description": "تصل أساسياتك في جميع أنحاء القاهرة مع تحديثات واضحة وانتظار أقل."
+      "description": "تصل أساسياتك في جميع أنحاء حدايق الاهرام مع تحديثات واضحة وانتظار أقل."
     },
     "support": {
       "title": "شخص حقيقي تسأله",
@@ -143,7 +146,7 @@
     "addToCart": "أضف إلى السلة",
     "addedToCart": "أُضيف إلى السلة",
     "sealedStock": "مخزون صيدلية مغلق",
-    "deliveryEstimate": "متاح للتوصيل في القاهرة · يصل عادةً خلال 2-4 ساعات",
+    "deliveryEstimate": "متاح للتوصيل في حدايق الاهرام · يصل عادةً خلال 2-4 ساعات",
     "notesBadge": "ملاحظات المنتج",
     "notesTitle": "معلومات بسيطة، عناية مدروسة.",
     "notesFallback": "{name} جزء من رفوف صيدليتنا اليومية، مختار بعناية لروتينك.",
@@ -181,6 +184,8 @@
     "simpleFinish": "خطوة أخيرة بسيطة.",
     "subtotal": "الإجمالي الفرعي",
     "total": "الإجمالي",
+    "deliveryFee": "رسوم التوصيل",
+    "deliveryFeeValue": "مجاني",
     "currency": "ج.م",
     "proceedToCheckout": "المتابعة إلى الدفع",
     "prescriptionNote": "الأصناف التي تتطلب وصفة طبية تتم مراجعتها وتأكيدها من قبل الصيدلي قبل الشحن.",
@@ -203,9 +208,9 @@
     "addressTitle": "عنوان التوصيل",
     "addressDescription": "سيتصل بك فريق التوصيل عند الاقتراب.",
     "city": "المدينة",
-    "cityPlaceholder": "القاهرة",
+    "cityPlaceholder": "الجيزة",
     "area": "المنطقة / الحي",
-    "areaPlaceholder": "مثال: مدينة نصر",
+    "areaPlaceholder": "حدايق الاهرام",
     "buildingStreet": "المبنى والشارع",
     "buildingStreetPlaceholder": "رقم المبنى، اسم الشارع",
     "apartment": "الشقة / الدور",
@@ -227,6 +232,8 @@
     "summaryTitle": "سلتك",
     "summaryTotal": "الإجمالي",
     "summaryPrescriptionNote": "قد تتطلب بعض الأدوية وصفة طبية أو موافقة الصيدلي قبل الشحن.",
+    "deliveryFee": "رسوم التوصيل",
+    "deliveryFeeValue": "مجاني",
     "currency": "ج.م",
     "emptyTitle": "سلتك فارغة",
     "emptyDescription": "أضف بعض الأساسيات قبل إتمام الطلب.",
@@ -303,6 +310,8 @@
     "meetTeam": "تعرف على فريق الرعاية",
     "hoursTitle": "مفتوحون وقت ما تحتاجنا",
     "locationTitle": "قريبون منك",
+    "deliveryTitle": "توصيل مجاني",
+    "deliveryDescription": "التوصيل متاح حالياً في حدايق الاهرام فقط وهو مجاني",
     "noteBadge": "ملاحظة مسؤولة",
     "noteTitle": "رعاية الوصفات الطبية، بالطريقة الصحيحة.",
     "noteDescription": "بعض الأدوية تتطلب وصفة طبية سارية أو موافقة الصيدلي. أرسل لنا طلبك وسيقوم فريقنا بمراجعته قبل تجهيز أي شيء.",

@@ -8,6 +8,9 @@
     "search": "Search",
     "cart": "Cart"
   },
+  "phoneButton": {
+    "ariaLabel": "Call us"
+  },
   "brandLoader": {
     "name": "Omar Pharmacy",
     "tagline": "Your trusted partner in health and wellness",
@@ -43,7 +46,7 @@
     "ctaPrimary": "Shop Products",
     "ctaSecondary": "Speak to a pharmacist",
     "trustProducts": "Trusted products",
-    "trustDelivery": "Same-day Cairo delivery",
+    "trustDelivery": "free delivery to Hadaek Al-Ahram",
     "cardLabel": "Your care kit",
     "cardBadge": "Ready today",
     "cardNoteLabel": "Pharmacist checked",
@@ -66,7 +69,7 @@
     "ctaPrimary": "Why customers choose us",
     "ctaSecondary": "Speak with our team",
     "trustService": "Thoughtful pharmacy service",
-    "trustLocation": "Serving Cairo daily",
+    "trustLocation": "Serving Hadaek Al-Ahram daily",
     "cardLabel": "Inside Omar Pharmacy",
     "cardTitle": "A little more human in every order.",
     "shelfNoteLabel": "Shelf note",
@@ -85,7 +88,7 @@
     },
     "delivery": {
       "title": "Fast, careful delivery",
-      "description": "Your essentials arrive across Cairo with clear updates and a little less waiting."
+      "description": "Your essentials arrive across Hadaek Al-Ahram with clear updates and a little less waiting."
     },
     "support": {
       "title": "A real person to ask",
@@ -143,7 +146,7 @@
     "addToCart": "Add to cart",
     "addedToCart": "Added to cart",
     "sealedStock": "Sealed pharmacy stock",
-    "deliveryEstimate": "Available for delivery in Cairo · Usually arrives within 2–4 hours",
+    "deliveryEstimate": "Available for delivery in Hadaek Al-Ahram · Usually arrives within 2–4 hours",
     "notesBadge": "Product notes",
     "notesTitle": "Simple information, considered care.",
     "notesFallback": "{name} is part of our everyday pharmacy shelf, chosen with care for your routine.",
@@ -181,6 +184,8 @@
     "simpleFinish": "A simple finish.",
     "subtotal": "Subtotal",
     "total": "Total",
+    "deliveryFee": "Delivery fee",
+    "deliveryFeeValue": "Free",
     "currency": "EGP",
     "proceedToCheckout": "Proceed to checkout",
     "prescriptionNote": "Prescription-only items are reviewed and confirmed by our pharmacist before dispatch.",
@@ -203,9 +208,9 @@
     "addressTitle": "Delivery address",
     "addressDescription": "Our delivery team will call when they are nearby.",
     "city": "City",
-    "cityPlaceholder": "Cairo",
+    "cityPlaceholder": "Giza",
     "area": "Area / district",
-    "areaPlaceholder": "e.g. Nasr City",
+    "areaPlaceholder": "Hadaek Al-Ahram",
     "buildingStreet": "Building & street",
     "buildingStreetPlaceholder": "Building number, street name",
     "apartment": "Apartment / floor",
@@ -227,6 +232,8 @@
     "summaryTitle": "Your basket",
     "summaryTotal": "Total",
     "summaryPrescriptionNote": "Some medicines may require a prescription or pharmacist approval before dispatch.",
+    "deliveryFee": "Delivery fee",
+    "deliveryFeeValue": "Free",
     "currency": "EGP",
     "emptyTitle": "Your basket is empty",
     "emptyDescription": "Add a few essentials before checking out.",
@@ -303,6 +310,8 @@
     "meetTeam": "Meet your care team",
     "hoursTitle": "Open when life happens",
     "locationTitle": "Local, not distant",
+    "deliveryTitle": "Free delivery",
+    "deliveryDescription": "Delivery is in Hadaek Al-Ahram only for now and it's free",
     "noteBadge": "A responsible note",
     "noteTitle": "Prescription care, handled properly.",
     "noteDescription": "Some medicines require a valid prescription or pharmacist approval. Send us your request and our team will review it before anything is prepared.",

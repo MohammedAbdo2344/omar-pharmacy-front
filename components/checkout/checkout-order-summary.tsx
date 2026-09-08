@@ -10,6 +10,8 @@ interface CheckoutOrderSummaryProps {
     total: string;
     currency: string;
     prescriptionNote: string;
+    deliveryFee: string;
+    deliveryFeeValue: string;
   };
 }
 
@@ -71,11 +73,19 @@ export default function CheckoutOrderSummary({ labels }: CheckoutOrderSummaryPro
         ))}
       </div>
 
-      <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between">
-        <span className="font-bold">{labels.total}</span>
-        <span className="text-2xl font-extrabold text-amber-300">
-          {labels.currency} {total}
-        </span>
+      <div className="mt-6 pt-6 border-t border-white/10 space-y-3">
+        <div className="flex items-center justify-between">
+          <span className="font-bold">{labels.deliveryFee}</span>
+          <span className="text-lg font-bold text-blue-200">
+            {labels.deliveryFeeValue}
+          </span>
+        </div>
+        <div className="flex items-center justify-between pt-3 border-t border-white/10">
+          <span className="font-bold">{labels.total}</span>
+          <span className="text-2xl font-extrabold text-amber-300">
+            {labels.currency} {total}
+          </span>
+        </div>
       </div>
 
       <div className="mt-4 bg-white/10 rounded-2xl p-4 flex items-start gap-3">

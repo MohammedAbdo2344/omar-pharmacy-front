@@ -41,8 +41,8 @@ const initialForm: FormState = {
   name: '',
   email: '',
   phone: '',
-  city: 'Cairo',
-  area: '',
+  city: 'Giza',
+  area: 'Hadaek Al-Ahram',
   building_street: '',
   appartment_number: '',
 };
@@ -208,6 +208,7 @@ export default function CheckoutPageClient({ config }: CheckoutPageClientProps) 
                   onChange={setField('city')}
                   placeholder={t('cityPlaceholder')}
                   error={errors.city?.[0]}
+                  readonly
                 />
                 <FormField
                   label={t('area')}
@@ -216,6 +217,7 @@ export default function CheckoutPageClient({ config }: CheckoutPageClientProps) 
                   onChange={setField('area')}
                   placeholder={t('areaPlaceholder')}
                   error={errors.area?.[0]}
+                  readonly
                 />
                 <div className="sm:col-span-2">
                   <FormField
@@ -305,6 +307,8 @@ export default function CheckoutPageClient({ config }: CheckoutPageClientProps) 
                 total: t('summaryTotal'),
                 currency: t('currency'),
                 prescriptionNote: t('summaryPrescriptionNote'),
+                deliveryFee: t('deliveryFee'),
+                deliveryFeeValue: t('deliveryFeeValue'),
               }}
             />
           </div>
@@ -322,9 +326,10 @@ interface FormFieldProps {
   required?: boolean;
   type?: string;
   error?: string;
+  readonly?: boolean;
 }
 
-function FormField({ label, value, onChange, placeholder, required, type = 'text', error }: FormFieldProps) {
+function FormField({ label, value, onChange, placeholder, required, type = 'text', error, readonly }: FormFieldProps) {
   return (
     <div>
       <label className="block text-sm font-semibold text-blue-950 mb-2">
@@ -336,7 +341,10 @@ function FormField({ label, value, onChange, placeholder, required, type = 'text
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        readOnly={readonly}
         className={`w-full rounded-xl border px-4 py-3 text-sm text-blue-950 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 ${
+          readonly ? 'bg-gray-50 text-gray-600 cursor-not-allowed' : ''
+        } ${
           error ? 'border-red-300' : 'border-gray-200'
         }`}
       />
