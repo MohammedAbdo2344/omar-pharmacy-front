@@ -2,6 +2,7 @@
   "navbar": {
     "home": "الرئيسية",
     "products": "المنتجات",
+    "bundles": "الباقات",
     "categories": "التصنيفات",
     "about": "من نحن",
     "contact": "اتصل بنا",
@@ -113,7 +114,8 @@
     "emptyTitle": "لا توجد منتجات",
     "emptyDescription": "جرّب كلمة بحث مختلفة أو تصفح جميع المنتجات.",
     "off": "خصم {percent}%",
-    "currency": "ج.م"
+    "currency": "ج.م",
+    "requestOnlyBadge": "متاح عند الطلب"
   },
   "productsShelfSection": {
     "badge": "استكشف المجموعة",
@@ -141,6 +143,8 @@
     "off": "خصم {percent}%",
     "inStock": "متوفر",
     "outOfStock": "غير متوفر",
+    "requestOnlyBadge": "متاح عند الطلب",
+    "requestOnlyNote": "هذا المنتج غير متوفر في مخزون صيدليتنا — نطلبه من المورّد بمجرد تقديمك للطلب، لذا قد يستغرق تجهيزه وقتاً أطول من المعتاد.",
     "save": "توفير {amount} ج.م",
     "currency": "ج.م",
     "addToCart": "أضف إلى السلة",
@@ -168,6 +172,31 @@
     "relatedTitle": "بعض الجيران المفيدين.",
     "viewAllProducts": "عرض كل المنتجات"
   },
+  "bundlesPage": {
+    "badge": "وفّر أكثر معاً",
+    "title": "باقات العناية",
+    "subtitle": "مجموعات مختارة بعناية من الأساسيات اليومية، بسعر واحد بسيط.",
+    "seeAll": "عرض كل الباقات",
+    "breadcrumb": "الباقات",
+    "currency": "ج.م",
+    "save": "توفّر {amount} ج.م",
+    "contains": "تحتوي على:",
+    "bundleTag": "باقة",
+    "whatsInside": "مكونات الباقة",
+    "priceBreakdown": "تفاصيل السعر",
+    "savePercent": "وفّر {percent}%",
+    "lineQuantity": "الكمية {quantity}",
+    "each": "للقطعة",
+    "ifBoughtSeparately": "عند الشراء بشكل منفصل",
+    "bundlePrice": "سعر الباقة",
+    "youSave": "توفّر",
+    "savingsPitch": "اشترِ هذه الباقة ووفّر {amount} ج.م ({percent}%) مقارنةً بشراء كل صنف على حدة.",
+    "addToCart": "أضف الباقة إلى السلة",
+    "addedToCart": "أُضيفت إلى السلة",
+    "unavailable": "غير متاحة حالياً",
+    "emptyTitle": "لا توجد باقات متاحة",
+    "emptyDescription": "تفقّد الصفحة قريباً — نجهّز باقات عناية جديدة بانتظام."
+  },
   "cartPage": {
     "breadcrumbHome": "الرئيسية",
     "breadcrumbCart": "سلتك",
@@ -190,7 +219,10 @@
     "proceedToCheckout": "المتابعة إلى الدفع",
     "prescriptionNote": "الأصناف التي تتطلب وصفة طبية تتم مراجعتها وتأكيدها من قبل الصيدلي قبل الشحن.",
     "emptyTitle": "سلتك فارغة",
-    "emptyDescription": "تصفح أساسياتنا وأضف بعضها للبدء."
+    "emptyDescription": "تصفح أساسياتنا وأضف بعضها للبدء.",
+    "bundleTag": "باقة",
+    "contains": "تحتوي على:",
+    "requestOnlyTag": "متاح عند الطلب · قد يستغرق وقتاً إضافياً"
   },
   "checkoutPage": {
     "badge": "دفع آمن",
@@ -256,7 +288,11 @@
     "nextPrescriptionNote": "إذا احتاج أحد الأصناف موافقة الصيدلي، سنتواصل معك قبل الشحن.",
     "orderNumberCopied": "تم نسخ رقم الطلب",
     "keepOrderHandy": "احتفظ برقم الطلب #{orderNumber} عند التواصل مع الصيدلي.",
-    "whatsappMessage": "مرحباً {siteName}، أرغب في تأكيد طلبي رقم {orderNumber} (الإجمالي {total} ج.م)."
+    "whatsappMessage": "مرحباً {siteName}، أرغب في تأكيد طلبي رقم {orderNumber} (الإجمالي {total} ج.م).",
+    "bundleTag": "باقة",
+    "contains": "تحتوي على:",
+    "requestOnlyTag": "متاح عند الطلب",
+    "requestOnlyReassurance": "يتضمن طلبك صنفاً متاحاً عند الطلب. سنؤكد لك الموعد المتوقع له هاتفياً بعد تقديم الطلب."
   },
   "contactHeroSection": {
     "badge": "نحن قريبون منك",

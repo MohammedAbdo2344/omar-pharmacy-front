@@ -17,11 +17,14 @@ interface CartProduct {
 
 interface CartItem {
   id: number;
-  product_id: number;
+  type: "product" | "bundle";
+  product_id: number | null;
+  bundle_id: number | null;
   quantity: number;
   unit_price: number;
   subtotal: number;
-  product: CartProduct;
+  product?: CartProduct;
+  bundle?: Record<string, unknown>;
 }
 
 interface CartData {

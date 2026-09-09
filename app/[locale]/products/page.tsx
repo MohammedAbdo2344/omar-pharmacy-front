@@ -10,6 +10,8 @@ interface ProductsPageProps {
   searchParams: Promise<{
     search?: string;
     category_id?: string;
+    subcategory_id?: string;
+    availability_type?: string;
     max_price?: string;
     page?: string;
     sort_by_price?: string;
@@ -18,8 +20,17 @@ interface ProductsPageProps {
 
 export default async function ProductsPage({ params, searchParams }: ProductsPageProps) {
   const { locale } = await params;
-  const { search, category_id: categoryId, max_price: maxPrice, page, sort_by_price: sortByPrice } =
-    await searchParams;
+  const {
+    search,
+    category_id: categoryId,
+    subcategory_id: subcategoryId,
+    availability_type: availabilityType,
+    max_price: maxPrice,
+    page,
+    sort_by_price: sortByPrice,
+  } = await searchParams;
+
+  const requestOnly = availabilityType === 'request_only';
 
   const token = await getGuestTokenServer();
 
@@ -29,6 +40,8 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
           search: search || undefined,
           page: page ? Number(page) : undefined,
           category_id: categoryId ? Number(categoryId) : undefined,
+          subcategory_id: subcategoryId ? Number(subcategoryId) : undefined,
+          availability_type: requestOnly ? 'request_only' : undefined,
           min_price: maxPrice ? 0 : undefined,
           max_price: maxPrice ? Number(maxPrice) : undefined,
           sort_by_price:
@@ -48,6 +61,8 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
         categories={categories}
         search={search}
         categoryId={categoryId}
+        subcategoryId={subcategoryId}
+        requestOnly={requestOnly}
         maxPrice={maxPrice}
       />
     </div>

@@ -31,6 +31,22 @@ export const CartService = {
     return serviceRequestMessage(`/api/cart/items/${productId}`, { method: "DELETE", token });
   },
 
+  updateBundleQuantity(
+    token: string,
+    bundleId: number,
+    payload: UpdateCartQuantityPayload
+  ): Promise<CartItemData> {
+    return serviceRequest<CartItemData>(`/api/cart/bundles/${bundleId}`, {
+      method: "PUT",
+      token,
+      body: payload,
+    });
+  },
+
+  removeBundle(token: string, bundleId: number) {
+    return serviceRequestMessage(`/api/cart/bundles/${bundleId}`, { method: "DELETE", token });
+  },
+
   clearCart(token: string) {
     return serviceRequestMessage("/api/cart", { method: "DELETE", token });
   },

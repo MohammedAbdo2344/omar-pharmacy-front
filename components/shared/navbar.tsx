@@ -49,6 +49,7 @@ export default function Navbar({ logo }: NavbarProps) {
     const navLinks = [
         { name: t('home'), href: '/' },
         { name: t('products'), href: '/products' },
+        { name: t('bundles'), href: '/bundles' },
         { name: t('about'), href: '/about' },
         { name: t('contact'), href: '/contact' },
     ];

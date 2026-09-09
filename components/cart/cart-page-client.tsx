@@ -8,7 +8,7 @@ import BrandLoader from '@/components/shared/brand-loader';
 
 export default function CartPageClient() {
   const t = useTranslations('cartPage');
-  const { items, itemCount, total, isLoading } = useCart();
+  const { items, itemCount, total, isLoading, error } = useCart();
 
   return (
     <div className="bg-blue-50/20">
@@ -67,9 +67,24 @@ export default function CartPageClient() {
                 </div>
               </div>
 
+              {error && (
+                <p className="mt-5 rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm font-semibold text-red-700">
+                  {error}
+                </p>
+              )}
+
               <div className="mt-5 space-y-4">
                 {items.map((item) => (
-                  <CartItemRow key={item.id} item={item} currency={t('currency')} />
+                  <CartItemRow
+                    key={item.id}
+                    item={item}
+                    currency={t('currency')}
+                    labels={{
+                      bundleTag: t('bundleTag'),
+                      contains: t('contains'),
+                      requestOnly: t('requestOnlyTag'),
+                    }}
+                  />
                 ))}
               </div>
 

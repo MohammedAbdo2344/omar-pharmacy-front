@@ -4,11 +4,17 @@ import { handleRouteError } from "@/lib/api/route-helpers";
 
 interface CheckoutOrderItem {
   id: number;
-  product_id: number;
-  product_name: string;
+  type?: "product" | "bundle";
+  product_id: number | null;
+  bundle_id?: number | null;
+  product_name?: string;
+  name?: string;
   quantity: number;
   unit_price: number;
   subtotal: number;
+  bundle_price?: number;
+  components?: { product_id: number; name: string; quantity: number; unit_price: number }[];
+  is_request_only?: boolean;
 }
 
 interface CheckoutData {

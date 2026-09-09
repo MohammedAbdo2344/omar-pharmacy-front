@@ -85,6 +85,11 @@ export default function CheckoutPageClient({ config }: CheckoutPageClientProps) 
     } catch (error) {
       if (error instanceof BackendApiError && error.errors) {
         setErrors(error.errors);
+      } else if (error instanceof BackendApiError && error.status === 422) {
+        // Business error (stock / bundle component / disabled item) — show the backend
+        // message and re-sync the cart so the customer sees the corrected state.
+        setSubmitError(error.message);
+        await refresh();
       } else {
         setSubmitError(t('genericError'));
       }
@@ -309,6 +314,9 @@ export default function CheckoutPageClient({ config }: CheckoutPageClientProps) 
                 prescriptionNote: t('summaryPrescriptionNote'),
                 deliveryFee: t('deliveryFee'),
                 deliveryFeeValue: t('deliveryFeeValue'),
+                bundleTag: t('bundleTag'),
+                contains: t('contains'),
+                requestOnly: t('requestOnlyTag'),
               }}
             />
           </div>

@@ -2,6 +2,7 @@
   "navbar": {
     "home": "Home",
     "products": "Products",
+    "bundles": "Bundles",
     "categories": "Categories",
     "about": "About us",
     "contact": "Contact",
@@ -113,7 +114,8 @@
     "emptyTitle": "No products found",
     "emptyDescription": "Try a different search term or browse all products.",
     "off": "{percent}% off",
-    "currency": "EGP"
+    "currency": "EGP",
+    "requestOnlyBadge": "Available on request"
   },
   "productsShelfSection": {
     "badge": "Explore the collection",
@@ -141,6 +143,8 @@
     "off": "{percent}% OFF",
     "inStock": "In stock",
     "outOfStock": "Out of stock",
+    "requestOnlyBadge": "Available on request",
+    "requestOnlyNote": "This product isn't kept in our pharmacy stock — we order it from our supplier once you place your order, so it may take a little longer to prepare than usual.",
     "save": "Save EGP {amount}",
     "currency": "EGP",
     "addToCart": "Add to cart",
@@ -168,6 +172,31 @@
     "relatedTitle": "A few useful neighbours.",
     "viewAllProducts": "View all products"
   },
+  "bundlesPage": {
+    "badge": "Save more together",
+    "title": "Care packages",
+    "subtitle": "Hand-picked sets of everyday essentials, bundled at one simple price.",
+    "seeAll": "See all bundles",
+    "breadcrumb": "Bundles",
+    "currency": "EGP",
+    "save": "You save EGP {amount}",
+    "contains": "Contains:",
+    "bundleTag": "Bundle",
+    "whatsInside": "What's inside",
+    "priceBreakdown": "Price breakdown",
+    "savePercent": "Save {percent}%",
+    "lineQuantity": "Qty {quantity}",
+    "each": "each",
+    "ifBoughtSeparately": "If bought separately",
+    "bundlePrice": "Bundle price",
+    "youSave": "You save",
+    "savingsPitch": "Buy this bundle and save EGP {amount} ({percent}%) versus buying each item on its own.",
+    "addToCart": "Add bundle to cart",
+    "addedToCart": "Added to cart",
+    "unavailable": "Currently unavailable",
+    "emptyTitle": "No bundles available",
+    "emptyDescription": "Check back soon — we put new care packages together regularly."
+  },
   "cartPage": {
     "breadcrumbHome": "Home",
     "breadcrumbCart": "Your cart",
@@ -190,7 +219,10 @@
     "proceedToCheckout": "Proceed to checkout",
     "prescriptionNote": "Prescription-only items are reviewed and confirmed by our pharmacist before dispatch.",
     "emptyTitle": "Your basket is empty",
-    "emptyDescription": "Browse our essentials and add a few to get started."
+    "emptyDescription": "Browse our essentials and add a few to get started.",
+    "bundleTag": "Bundle",
+    "contains": "Contains:",
+    "requestOnlyTag": "Available on request · may take extra time"
   },
   "checkoutPage": {
     "badge": "Secure checkout",
@@ -256,7 +288,11 @@
     "nextPrescriptionNote": "If an item needs pharmacist approval, we will contact you before dispatch.",
     "orderNumberCopied": "Order number copied",
     "keepOrderHandy": "Keep order #{orderNumber} handy when contacting a pharmacist.",
-    "whatsappMessage": "Hi {siteName}, I'd like to confirm my order {orderNumber} (total EGP {total})."
+    "whatsappMessage": "Hi {siteName}, I'd like to confirm my order {orderNumber} (total EGP {total}).",
+    "bundleTag": "Bundle",
+    "contains": "Contains:",
+    "requestOnlyTag": "Available on request",
+    "requestOnlyReassurance": "Your order includes an item available on request. We'll confirm its expected date by phone after you place the order."
   },
   "contactHeroSection": {
     "badge": "We're nearby",

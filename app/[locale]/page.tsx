@@ -1,8 +1,10 @@
 import Hero from '@/components/home/hero';
 import CategoriesSection from '@/components/home/categories-section';
 import ProductsSection from '@/components/home/products-section';
+import BundlesSection from '@/components/home/bundles-section';
 import WhyOmarSection from '@/components/home/why-omar-section';
 import { HomeServiceServer } from '@/services/home/home.service.server';
+import { BundlesServiceServer } from '@/services/bundles/bundles.service.server';
 import { getGuestTokenServer } from '@/lib/guest-session.server';
 
 interface HomePageProps {
@@ -12,7 +14,11 @@ interface HomePageProps {
 export default async function HomePage({ params }: HomePageProps) {
   const { locale } = await params;
   const token = await getGuestTokenServer();
-  const homeData = token ? await HomeServiceServer.getHome(token, locale).catch(() => null) : null;
+
+  const [homeData, bundlesData] = await Promise.all([
+    token ? HomeServiceServer.getHome(token, locale).catch(() => null) : null,
+    token ? BundlesServiceServer.getBundles(token, locale).catch(() => null) : null,
+  ]);
 
   return (
     <div className="min-h-screen">
@@ -24,6 +30,9 @@ export default async function HomePage({ params }: HomePageProps) {
 
       {/* Products Preview */}
       <ProductsSection products={homeData?.products ?? []} />
+
+      {/* Bundles Preview */}
+      <BundlesSection bundles={bundlesData?.bundles ?? []} />
 
       {/* Why Omar Section */}
       <WhyOmarSection />
