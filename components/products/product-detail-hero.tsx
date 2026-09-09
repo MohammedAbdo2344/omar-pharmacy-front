@@ -25,8 +25,13 @@ export default async function ProductDetailHero({ product }: ProductDetailHeroPr
   const discountPercent = product.discount_percentage ?? product.active_discount?.value ?? null;
   const savings = hasDiscount && finalPrice !== null ? (price - finalPrice).toFixed(2) : null;
 
+  const isRequestOnly =
+    product.is_request_only === true || product.availability_type === 'request_only';
   const inStock = (product.stock_quantity ?? 0) > 0;
   const productColor = getProductColor(product.color);
+
+  const categoryParent = product.category?.parent?.name ?? null;
+  const categoryLeaf = product.category?.name ?? product.category_name ?? null;
 
   const galleryImages = (
     product.images && product.images.length > 0
@@ -47,10 +52,16 @@ export default async function ProductDetailHero({ product }: ProductDetailHeroPr
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-sm text-gray-400">
           <a href="/products" className="hover:text-blue-600 transition-colors">{t('breadcrumbProducts')}</a>
-          {product.category_name && (
+          {categoryParent && (
             <>
               <ChevronRight className="w-3.5 h-3.5 rtl:rotate-180" />
-              <span className="font-semibold text-blue-950">{product.category_name}</span>
+              <span className="font-semibold text-blue-950">{categoryParent}</span>
+            </>
+          )}
+          {categoryLeaf && (
+            <>
+              <ChevronRight className="w-3.5 h-3.5 rtl:rotate-180" />
+              <span className="font-semibold text-blue-950">{categoryLeaf}</span>
             </>
           )}
           <ChevronRight className="w-3.5 h-3.5 rtl:rotate-180" />
@@ -73,17 +84,23 @@ export default async function ProductDetailHero({ product }: ProductDetailHeroPr
                   {t('off', { percent: discountPercent })}
                 </span>
               )}
-              <span
-                className={`inline-flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded-full ${inStock ? 'bg-emerald-50 text-emerald-700' : 'bg-gray-100 text-gray-500'
-                  }`}
-              >
-                {inStock && <Check className="w-3 h-3" />}
-                {inStock ? t('inStock') : t('outOfStock')}
-              </span>
+              {isRequestOnly ? (
+                <span className="inline-flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded-full bg-amber-50 text-amber-700">
+                  {t('requestOnlyBadge')}
+                </span>
+              ) : (
+                <span
+                  className={`inline-flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded-full ${inStock ? 'bg-emerald-50 text-emerald-700' : 'bg-gray-100 text-gray-500'
+                    }`}
+                >
+                  {inStock && <Check className="w-3 h-3" />}
+                  {inStock ? t('inStock') : t('outOfStock')}
+                </span>
+              )}
             </div>
 
             <div className="mt-4 text-xs font-semibold tracking-widest uppercase text-emerald-700">
-              {[product.brand, product.category_name].filter(Boolean).join(' · ')}
+              {[product.brand, categoryLeaf].filter(Boolean).join(' · ')}
             </div>
 
             <h1 className="mt-2 text-4xl md:text-5xl font-extrabold text-blue-950 leading-tight">
@@ -116,12 +133,15 @@ export default async function ProductDetailHero({ product }: ProductDetailHeroPr
               <ProductDetailActions
                 productId={product.id}
                 stockQuantity={product.stock_quantity ?? 0}
+                isRequestOnly={isRequestOnly}
                 addLabel={t('addToCart')}
                 addedLabel={t('addedToCart')}
               />
             </div>
 
-            <p className="mt-4 text-sm text-gray-400">{t('deliveryEstimate')}</p>
+            <p className="mt-4 text-sm text-gray-400">
+              {isRequestOnly ? t('requestOnlyNote') : t('deliveryEstimate')}
+            </p>
           </div>
         </div>
       </div>

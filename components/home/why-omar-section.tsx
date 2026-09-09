@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Clock, MapPin, ShieldCheck, ArrowRight, Phone } from 'lucide-react';
+import { Clock, MapPin, ShieldCheck, ArrowRight, Phone, Truck } from 'lucide-react';
 import { useConfig } from '@/providers/config-provider';
 
 export default function WhyOmarSection() {
@@ -17,7 +17,7 @@ export default function WhyOmarSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Main card */}
-          <div className="md:col-span-1 bg-blue-950 rounded-3xl p-8 flex flex-col justify-between text-white">
+          <div className="bg-blue-950 rounded-3xl p-8 flex flex-col justify-between text-white row-span-2">
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
@@ -43,21 +43,36 @@ export default function WhyOmarSection() {
           </div>
 
           {/* Hours card */}
-          <div className="bg-amber-50 rounded-3xl p-8">
-            <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm mb-6">
+          <div className="bg-amber-50 rounded-3xl p-8 flex items-center gap-6">
+            <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0">
               <Clock className="w-5 h-5 text-amber-600" />
             </div>
-            <h3 className="font-bold text-amber-900 mb-1">{t('hoursTitle')}</h3>
-            <p className="text-gray-500 text-sm">{workingHours}</p>
+            <div>
+              <h3 className="font-bold text-amber-900 mb-1">{t('hoursTitle')}</h3>
+              <p className="text-gray-500 text-sm">{workingHours}</p>
+            </div>
           </div>
 
           {/* Location card */}
-          <div className="bg-blue-50 rounded-3xl p-8">
-            <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm mb-6">
+          <div className="bg-blue-50 rounded-3xl p-8 flex items-center gap-6">
+            <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0">
               <MapPin className="w-5 h-5 text-blue-950" />
             </div>
-            <h3 className="font-bold text-blue-950 mb-1">{t('locationTitle')}</h3>
-            <p className="text-gray-500 text-sm">{address}</p>
+            <div>
+              <h3 className="font-bold text-blue-950 mb-1">{t('locationTitle')}</h3>
+              <p className="text-gray-500 text-sm">{address}</p>
+            </div>
+          </div>
+
+          {/* Delivery card - landscape under Hours and Location */}
+          <div className="md:col-start-2 md:col-span-2 bg-emerald-50 rounded-3xl p-8 flex items-center gap-6">
+            <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0">
+              <Truck className="w-5 h-5 text-emerald-600" />
+            </div>
+            <div>
+              <h3 className="font-bold text-emerald-900 mb-1">{t('deliveryTitle')}</h3>
+              <p className="text-gray-500 text-sm">{t('deliveryDescription')}</p>
+            </div>
           </div>
         </div>
 

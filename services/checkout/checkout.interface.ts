@@ -8,13 +8,29 @@ export interface CheckoutPayload {
   appartment_number: string;
 }
 
+export interface CheckoutOrderComponent {
+  product_id: number;
+  name: string;
+  quantity: number;
+  unit_price: number;
+}
+
 export interface CheckoutOrderItem {
   id: number;
-  product_id: number;
-  product_name: string;
+  type?: "product" | "bundle";
+  product_id: number | null;
+  bundle_id?: number | null;
+  /** New snapshot field; legacy payloads used `product_name`. */
+  name?: string;
+  product_name?: string;
   quantity: number;
   unit_price: number;
   subtotal: number;
+  /** Frozen bundle price at purchase time (bundle lines only). */
+  bundle_price?: number;
+  /** Purchase-time snapshot of the bundle's components (bundle lines only). */
+  components?: CheckoutOrderComponent[];
+  is_request_only?: boolean;
 }
 
 export interface CheckoutData {

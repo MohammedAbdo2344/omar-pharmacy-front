@@ -50,11 +50,11 @@ export default async function Hero() {
             <div className="mt-8 flex flex-wrap items-center gap-6 text-sm text-gray-600">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-5 h-5 text-blue-600" />
-                <span>{t('trustProducts')}</span>
+                <span className="font-bold">{t('trustProducts')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Truck className="w-5 h-5 text-blue-600" />
-                <span>{t('trustDelivery')}</span>
+                <span className="font-bold">{t('trustDelivery')}</span>
               </div>
             </div>
           </div>

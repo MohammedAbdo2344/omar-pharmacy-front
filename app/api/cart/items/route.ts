@@ -5,7 +5,9 @@ import { handleRouteError } from "@/lib/api/route-helpers";
 interface CartItemData {
   item: {
     id: number;
-    product_id: number;
+    type: "product" | "bundle";
+    product_id: number | null;
+    bundle_id: number | null;
     quantity: number;
     unit_price: number;
     subtotal: number;

@@ -48,6 +48,7 @@ export default async function ProductRelatedSection({ products }: ProductRelated
                 popular: tShelf('popular'),
                 new: tShelf('new'),
                 prescriptionNote: tShelf('prescriptionNote'),
+                requestOnly: tResults('requestOnlyBadge'),
               }}
             />
           ))}

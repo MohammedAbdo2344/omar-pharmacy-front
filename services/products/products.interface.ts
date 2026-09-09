@@ -1,5 +1,7 @@
 export interface ProductListParams {
   category_id?: number;
+  subcategory_id?: number;
+  availability_type?: "in_stock" | "request_only";
   min_price?: number;
   max_price?: number;
   sort_by_price?: "low_to_high" | "high_to_low";

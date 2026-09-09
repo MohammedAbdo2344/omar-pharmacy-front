@@ -116,12 +116,25 @@ export default function CheckoutSuccess({ order, siteName, whatsappNumber, payme
 
           <div className="mt-4 divide-y divide-gray-100">
             {order.items.map((item) => (
-              <div key={item.id} className="py-4 flex items-center justify-between gap-4">
+              <div key={item.id} className="py-4 flex items-start justify-between gap-4">
                 <div>
-                  <div className="font-bold text-blue-950">{item.product_name}</div>
+                  <div className="flex items-center gap-2">
+                    {item.type === 'bundle' && (
+                      <span className="text-[10px] font-bold uppercase tracking-wide text-purple-700 bg-purple-50 px-1.5 py-0.5 rounded">
+                        {t('bundleTag')}
+                      </span>
+                    )}
+                    <div className="font-bold text-blue-950">{item.name ?? item.product_name}</div>
+                  </div>
                   <div className="text-sm text-gray-400">
                     {t('qtyLabel', { quantity: item.quantity })} · {t('currency')} {item.unit_price}
                   </div>
+                  {item.type === 'bundle' && item.components && item.components.length > 0 && (
+                    <div className="mt-1 text-xs text-gray-400">
+                      {t('contains')}{' '}
+                      {item.components.map((c) => `${c.quantity}× ${c.name}`).join(', ')}
+                    </div>
+                  )}
                 </div>
                 <div className="font-bold text-blue-950 shrink-0">
                   {t('currency')} {item.subtotal}
@@ -129,6 +142,12 @@ export default function CheckoutSuccess({ order, siteName, whatsappNumber, payme
               </div>
             ))}
           </div>
+
+          {order.items.some((item) => item.is_request_only) && (
+            <p className="mt-4 rounded-2xl bg-amber-50 px-4 py-3 text-xs text-amber-900/80">
+              {t('requestOnlyReassurance')}
+            </p>
+          )}
 
           <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
             <span className="font-bold text-blue-950">{t('total')}</span>

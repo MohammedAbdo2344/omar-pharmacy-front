@@ -2,6 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { backendRequest, extractBearerToken, extractLocale } from "@/lib/api/backend-client";
 import { handleRouteError } from "@/lib/api/route-helpers";
 
+interface SubcategoryRecord {
+  id: number;
+  name: string;
+  slug: string;
+  image_url: string | null;
+  color: string | null;
+  parent_id: number | null;
+}
+
 interface CategoryRecord {
   id: number;
   name: string;
@@ -12,6 +21,7 @@ interface CategoryRecord {
   is_active: boolean;
   sort_order: number;
   color: string | null;
+  subcategories?: SubcategoryRecord[];
   created_at: string | null;
   updated_at: string | null;
 }

@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 import Navbar from '@/components/shared/navbar';
 import Footer from '@/components/shared/footer';
 import WhatsAppButton from '@/components/shared/whatsapp-button';
+import PhoneButton from '@/components/shared/phone-button';
 import { CartProvider } from '@/context/cart-context';
 import { ConfigProvider } from '@/providers/config-provider';
 import { ConfigServiceServer } from '@/services/config/config.service.server';
@@ -99,6 +100,7 @@ export default async function LocaleLayout({
                 <Footer />
               </div>
               <WhatsAppButton />
+              <PhoneButton />
             </CartProvider>
           </ConfigProvider>
         </NextIntlClientProvider>

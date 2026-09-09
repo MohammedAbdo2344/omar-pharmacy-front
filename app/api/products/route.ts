@@ -24,6 +24,8 @@ export async function GET(request: NextRequest) {
       locale: extractLocale(request),
       query: {
         category_id: searchParams.get("category_id") ?? undefined,
+        subcategory_id: searchParams.get("subcategory_id") ?? undefined,
+        availability_type: searchParams.get("availability_type") ?? undefined,
         min_price: searchParams.get("min_price") ?? undefined,
         max_price: searchParams.get("max_price") ?? undefined,
         sort_by_price: searchParams.get("sort_by_price") ?? undefined,

@@ -12,25 +12,45 @@ interface ProductsShelfSectionProps {
   categories: CategoryRecord[];
   search?: string;
   categoryId?: string;
+  subcategoryId?: string;
+  requestOnly?: boolean;
   maxPrice?: string;
 }
+
+const isRequestOnlyProduct = (p: ProductListItem) =>
+  p.is_request_only === true || p.availability_type === 'request_only';
 
 export default async function ProductsShelfSection({
   data,
   categories,
   search,
   categoryId,
+  subcategoryId,
+  requestOnly = false,
   maxPrice,
 }: ProductsShelfSectionProps) {
   const t = await getTranslations('productsShelfSection');
   const tResults = await getTranslations('productsResultsSection');
 
-  const products = (data?.products ?? []) as unknown as ProductListItem[];
+  const allProducts = (data?.products ?? []) as unknown as ProductListItem[];
+  // Defensive client-side filter in case the backend ignores `availability_type`.
+  const products = requestOnly ? allProducts.filter(isRequestOnlyProduct) : allProducts;
   const pagination = data?.pagination;
-  const total = pagination?.total ?? products.length;
+  const total = requestOnly ? products.length : pagination?.total ?? products.length;
+  /** Show the "Available on request" filter once such a product appears in the results. */
+  const showRequestOnly = requestOnly || allProducts.some(isRequestOnlyProduct);
 
   const selectedCategory = categoryId ? categories.find((c) => String(c.id) === categoryId) : undefined;
-  const categoryLabel = selectedCategory ? selectedCategory.name : t('allCategories');
+  const selectedSubcategory = subcategoryId
+    ? categories.flatMap((c) => c.subcategories ?? []).find((s) => String(s.id) === subcategoryId)
+    : undefined;
+  const categoryLabel = requestOnly
+    ? tResults('requestOnlyBadge')
+    : selectedSubcategory
+      ? selectedSubcategory.name
+      : selectedCategory
+        ? selectedCategory.name
+        : t('allCategories');
   const priceLabel = maxPrice ? t('priceMaximum', { amount: maxPrice }) : null;
 
   return (
@@ -76,10 +96,12 @@ export default async function ProductsShelfSection({
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8 items-start">
           <ProductsFiltersSidebar
             categories={categories}
+            showRequestOnly={showRequestOnly}
             labels={{
               title: t('filterShelf'),
               reset: t('reset'),
               allProducts: t('allProducts'),
+              requestOnly: tResults('requestOnlyBadge'),
               priceUpTo: t('priceUpTo'),
               priceNoLimit: t('priceNoLimit'),
             }}
@@ -105,6 +127,7 @@ export default async function ProductsShelfSection({
                       popular: t('popular'),
                       new: t('new'),
                       prescriptionNote: t('prescriptionNote'),
+                      requestOnly: tResults('requestOnlyBadge'),
                     }}
                   />
                 ))}

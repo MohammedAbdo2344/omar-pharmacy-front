@@ -1,6 +1,7 @@
 import { Stethoscope } from 'lucide-react';
 import { resolveAssetUrl } from '@/lib/api/asset-url';
 import { AddToCartButton } from '@/components/home/add-to-cart-button';
+import type { ProductCategory } from '@/services/categories/categories.interface';
 import WishlistButton from './wishlist-button';
 
 const DEFAULT_PRODUCT_COLOR = '#e0f2fe';
@@ -13,6 +14,9 @@ export interface ProductListItem {
   final_price?: string | number;
   discount_percentage?: string | number;
   stock_quantity?: number;
+  stock_availability?: string;
+  availability_type?: 'in_stock' | 'request_only';
+  is_request_only?: boolean;
   brand?: string | null;
   tablet_count?: string | null;
   is_best_seller?: boolean;
@@ -22,6 +26,7 @@ export interface ProductListItem {
   primary_image?: { image?: string | null; image_url?: string | null; alt_text?: string | null } | null;
   active_discount?: { value?: string | number; type?: string } | null;
   categories?: { id: number; name: string }[];
+  category?: ProductCategory | null;
   color?: string | null;
 }
 
@@ -34,6 +39,7 @@ interface ProductCardProps {
     popular: string;
     new: string;
     prescriptionNote: string;
+    requestOnly: string;
   };
 }
 
@@ -72,8 +78,10 @@ export default function ProductCard({ product, labels }: ProductCardProps) {
   const hasDiscount = finalPrice !== null && finalPrice < price;
 
   const imageUrl = resolveAssetUrl(product.primary_image?.image ?? product.primary_image?.image_url);
-  const categoryName = product.categories?.[0]?.name;
+  const categoryName = product.category?.name ?? product.categories?.[0]?.name;
   const productColor = getProductColor(product.color);
+  const isRequestOnly =
+    product.is_request_only === true || product.availability_type === 'request_only';
 
   const statusLabel = product.is_best_seller
     ? labels.bestSeller
@@ -93,6 +101,11 @@ export default function ProductCard({ product, labels }: ProductCardProps) {
         style={{ backgroundColor: productColor }}
       >
         <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 flex-wrap">
+          {isRequestOnly && (
+            <span className="bg-white/90 text-amber-700 text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 rounded-full shadow-sm">
+              {labels.requestOnly}
+            </span>
+          )}
           {hasDiscount && discountPercent && (
             <span className="bg-white/90 text-amber-700 text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 rounded-full shadow-sm">
               {labels.off(discountPercent)}
@@ -158,7 +171,14 @@ export default function ProductCard({ product, labels }: ProductCardProps) {
             )}
           </div>
 
-          <AddToCartButton productId={product.id} />
+          <AddToCartButton
+            productId={product.id}
+            outOfStock={
+              !isRequestOnly &&
+              (product.stock_availability === 'out_of_stock' ||
+                (product.stock_availability == null && product.stock_quantity === 0))
+            }
+          />
         </div>
 
         {product.requires_prescription && (

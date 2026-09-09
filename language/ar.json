@@ -2,11 +2,15 @@
   "navbar": {
     "home": "الرئيسية",
     "products": "المنتجات",
+    "bundles": "الباقات",
     "categories": "التصنيفات",
     "about": "من نحن",
     "contact": "اتصل بنا",
     "search": "بحث",
     "cart": "السلة"
+  },
+  "phoneButton": {
+    "ariaLabel": "اتصل بنا"
   },
   "brandLoader": {
     "name": "صيدلية عمر",
@@ -43,7 +47,7 @@
     "ctaPrimary": "تسوق المنتجات",
     "ctaSecondary": "تحدث مع صيدلي",
     "trustProducts": "منتجات موثوقة",
-    "trustDelivery": "توصيل في نفس اليوم بالقاهرة",
+    "trustDelivery": "توصيل مجاني في نفس اليوم بحدايق الاهرام",
     "cardLabel": "عبوة العناية الخاصة بك",
     "cardBadge": "جاهزة اليوم",
     "cardNoteLabel": "تم فحصها من قبل الصيدلي",
@@ -66,7 +70,7 @@
     "ctaPrimary": "لماذا يختارنا عملاؤنا",
     "ctaSecondary": "تحدث مع فريقنا",
     "trustService": "خدمة صيدلية مدروسة",
-    "trustLocation": "نخدم القاهرة يومياً",
+    "trustLocation": "نخدم حدايق الاهرام يومياً",
     "cardLabel": "داخل صيدلية عمر",
     "cardTitle": "لمسة إنسانية أكثر في كل طلب.",
     "shelfNoteLabel": "ملاحظة الرف",
@@ -85,7 +89,7 @@
     },
     "delivery": {
       "title": "توصيل سريع وحريص",
-      "description": "تصل أساسياتك في جميع أنحاء القاهرة مع تحديثات واضحة وانتظار أقل."
+      "description": "تصل أساسياتك في جميع أنحاء حدايق الاهرام مع تحديثات واضحة وانتظار أقل."
     },
     "support": {
       "title": "شخص حقيقي تسأله",
@@ -110,7 +114,8 @@
     "emptyTitle": "لا توجد منتجات",
     "emptyDescription": "جرّب كلمة بحث مختلفة أو تصفح جميع المنتجات.",
     "off": "خصم {percent}%",
-    "currency": "ج.م"
+    "currency": "ج.م",
+    "requestOnlyBadge": "متاح عند الطلب"
   },
   "productsShelfSection": {
     "badge": "استكشف المجموعة",
@@ -138,12 +143,14 @@
     "off": "خصم {percent}%",
     "inStock": "متوفر",
     "outOfStock": "غير متوفر",
+    "requestOnlyBadge": "متاح عند الطلب",
+    "requestOnlyNote": "هذا المنتج غير متوفر في مخزون صيدليتنا — نطلبه من المورّد بمجرد تقديمك للطلب، لذا قد يستغرق تجهيزه وقتاً أطول من المعتاد.",
     "save": "توفير {amount} ج.م",
     "currency": "ج.م",
     "addToCart": "أضف إلى السلة",
     "addedToCart": "أُضيف إلى السلة",
     "sealedStock": "مخزون صيدلية مغلق",
-    "deliveryEstimate": "متاح للتوصيل في القاهرة · يصل عادةً خلال 2-4 ساعات",
+    "deliveryEstimate": "متاح للتوصيل في حدايق الاهرام · يصل عادةً خلال 2-4 ساعات",
     "notesBadge": "ملاحظات المنتج",
     "notesTitle": "معلومات بسيطة، عناية مدروسة.",
     "notesFallback": "{name} جزء من رفوف صيدليتنا اليومية، مختار بعناية لروتينك.",
@@ -165,6 +172,31 @@
     "relatedTitle": "بعض الجيران المفيدين.",
     "viewAllProducts": "عرض كل المنتجات"
   },
+  "bundlesPage": {
+    "badge": "وفّر أكثر معاً",
+    "title": "باقات العناية",
+    "subtitle": "مجموعات مختارة بعناية من الأساسيات اليومية، بسعر واحد بسيط.",
+    "seeAll": "عرض كل الباقات",
+    "breadcrumb": "الباقات",
+    "currency": "ج.م",
+    "save": "توفّر {amount} ج.م",
+    "contains": "تحتوي على:",
+    "bundleTag": "باقة",
+    "whatsInside": "مكونات الباقة",
+    "priceBreakdown": "تفاصيل السعر",
+    "savePercent": "وفّر {percent}%",
+    "lineQuantity": "الكمية {quantity}",
+    "each": "للقطعة",
+    "ifBoughtSeparately": "عند الشراء بشكل منفصل",
+    "bundlePrice": "سعر الباقة",
+    "youSave": "توفّر",
+    "savingsPitch": "اشترِ هذه الباقة ووفّر {amount} ج.م ({percent}%) مقارنةً بشراء كل صنف على حدة.",
+    "addToCart": "أضف الباقة إلى السلة",
+    "addedToCart": "أُضيفت إلى السلة",
+    "unavailable": "غير متاحة حالياً",
+    "emptyTitle": "لا توجد باقات متاحة",
+    "emptyDescription": "تفقّد الصفحة قريباً — نجهّز باقات عناية جديدة بانتظام."
+  },
   "cartPage": {
     "breadcrumbHome": "الرئيسية",
     "breadcrumbCart": "سلتك",
@@ -181,11 +213,16 @@
     "simpleFinish": "خطوة أخيرة بسيطة.",
     "subtotal": "الإجمالي الفرعي",
     "total": "الإجمالي",
+    "deliveryFee": "رسوم التوصيل",
+    "deliveryFeeValue": "مجاني",
     "currency": "ج.م",
     "proceedToCheckout": "المتابعة إلى الدفع",
     "prescriptionNote": "الأصناف التي تتطلب وصفة طبية تتم مراجعتها وتأكيدها من قبل الصيدلي قبل الشحن.",
     "emptyTitle": "سلتك فارغة",
-    "emptyDescription": "تصفح أساسياتنا وأضف بعضها للبدء."
+    "emptyDescription": "تصفح أساسياتنا وأضف بعضها للبدء.",
+    "bundleTag": "باقة",
+    "contains": "تحتوي على:",
+    "requestOnlyTag": "متاح عند الطلب · قد يستغرق وقتاً إضافياً"
   },
   "checkoutPage": {
     "badge": "دفع آمن",
@@ -203,9 +240,9 @@
     "addressTitle": "عنوان التوصيل",
     "addressDescription": "سيتصل بك فريق التوصيل عند الاقتراب.",
     "city": "المدينة",
-    "cityPlaceholder": "القاهرة",
+    "cityPlaceholder": "الجيزة",
     "area": "المنطقة / الحي",
-    "areaPlaceholder": "مثال: مدينة نصر",
+    "areaPlaceholder": "حدايق الاهرام",
     "buildingStreet": "المبنى والشارع",
     "buildingStreetPlaceholder": "رقم المبنى، اسم الشارع",
     "apartment": "الشقة / الدور",
@@ -227,6 +264,8 @@
     "summaryTitle": "سلتك",
     "summaryTotal": "الإجمالي",
     "summaryPrescriptionNote": "قد تتطلب بعض الأدوية وصفة طبية أو موافقة الصيدلي قبل الشحن.",
+    "deliveryFee": "رسوم التوصيل",
+    "deliveryFeeValue": "مجاني",
     "currency": "ج.م",
     "emptyTitle": "سلتك فارغة",
     "emptyDescription": "أضف بعض الأساسيات قبل إتمام الطلب.",
@@ -249,7 +288,11 @@
     "nextPrescriptionNote": "إذا احتاج أحد الأصناف موافقة الصيدلي، سنتواصل معك قبل الشحن.",
     "orderNumberCopied": "تم نسخ رقم الطلب",
     "keepOrderHandy": "احتفظ برقم الطلب #{orderNumber} عند التواصل مع الصيدلي.",
-    "whatsappMessage": "مرحباً {siteName}، أرغب في تأكيد طلبي رقم {orderNumber} (الإجمالي {total} ج.م)."
+    "whatsappMessage": "مرحباً {siteName}، أرغب في تأكيد طلبي رقم {orderNumber} (الإجمالي {total} ج.م).",
+    "bundleTag": "باقة",
+    "contains": "تحتوي على:",
+    "requestOnlyTag": "متاح عند الطلب",
+    "requestOnlyReassurance": "يتضمن طلبك صنفاً متاحاً عند الطلب. سنؤكد لك الموعد المتوقع له هاتفياً بعد تقديم الطلب."
   },
   "contactHeroSection": {
     "badge": "نحن قريبون منك",
@@ -303,6 +346,8 @@
     "meetTeam": "تعرف على فريق الرعاية",
     "hoursTitle": "مفتوحون وقت ما تحتاجنا",
     "locationTitle": "قريبون منك",
+    "deliveryTitle": "توصيل مجاني",
+    "deliveryDescription": "التوصيل متاح حالياً في حدايق الاهرام فقط وهو مجاني",
     "noteBadge": "ملاحظة مسؤولة",
     "noteTitle": "رعاية الوصفات الطبية، بالطريقة الصحيحة.",
     "noteDescription": "بعض الأدوية تتطلب وصفة طبية سارية أو موافقة الصيدلي. أرسل لنا طلبك وسيقوم فريقنا بمراجعته قبل تجهيز أي شيء.",
